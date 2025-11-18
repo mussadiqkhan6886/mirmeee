@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`bg-light ${mont.className} max-w-[1380px] mx-auto antialiased`}
+        className={`bg-light ${mont.className} max-w-[1440px] mx-auto antialiased`}
       >
         {children}
       </body>

@@ -27,14 +27,14 @@ const Header = () => {
             <Image src={"/logo.jpg"} alt='logo of shop' width={70} height={70} />
         </div>
         <nav className='lg:flex hidden items-center justify-center'>
-          <ul className='flex lg: gap-x-5 xl:gap-x-8 items-center'>
+          <ul className='flex lg:gap-x-5 xl:gap-x-8 items-center'>
           {navigation.map(item => (
-              <li key={item.title}><Link className=' font-semibold text-sm xl:text-[17px] uppercase  whitespace-nowrap hover:underline duration-200' href={item.link}>{item.title}</Link></li>
+              <li key={item.title}><Link className='text-sm uppercase  whitespace-nowrap hover:underline duration-200' href={item.link}>{item.title}</Link></li>
           ))}
           </ul>
         </nav>
         <div className='flex gap-5 items-center'>
-            <Link href={"/cart"}><ShoppingBag /></Link>
+            <Link href={"/cart"}><ShoppingBag size={18} /></Link>
             {!sideBar && <Menu onClick={() => setSideBar(true)} className='inline-block lg:hidden' />}
             {sideBar && <X onClick={() => setSideBar(false)} className='inline-block lg:hidden' />}
         </div>

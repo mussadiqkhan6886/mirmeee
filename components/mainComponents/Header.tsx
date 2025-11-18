@@ -13,18 +13,17 @@ const Header = () => {
   return (
     <header className='lg:px-30 md:px-20 sm:px-10 px-4 bg-white'>
       <div className='flex justify-between items-center py-4'>
-        <Search />
         <div>
             <Image src={"/logo.jpg"} alt='logo of shop' width={70} height={70} />
         </div>
         <div className='flex gap-5 items-center'>
-            <ShoppingBag />
+            <Link href={"/cart"}><ShoppingBag /></Link>
             {!sideBar && <Menu onClick={() => setSideBar(true)} className='inline-block md:hidden' />}
             {sideBar && <X onClick={() => setSideBar(false)} className='inline-block md:hidden' />}
         </div>
       </div>
       <nav className='md:flex hidden items-center justify-center'>
-        <ul className='flex gap-6 lg:gap-8 items-center py-4'>
+        <ul className='flex gap-6 lg:gap-8 items-center pb-4'>
         {navigation.map(item => (
             <li key={item.title}><Link className='text-sm text-gray-700 hover:text-font whitespace-nowrap hover:underline duration-200' href={item.link}>{item.title}</Link></li>
         ))}

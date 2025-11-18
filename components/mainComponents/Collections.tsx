@@ -1,11 +1,17 @@
-import React from 'react'
+import { collections } from "@/lib/constants";
+import { InfiniteMovingCards } from "./ui/MovingCollections";
 
-const Collections = () => {
+export function MovingCollections() {
   return (
-    <section className='xl:px-30 lg:px-20 md:px-10 px-5'>
-      
+    <section className="flex flex-col antialiased items-center justify-center relative overflow-hidden">
+      <h2 className="uppercase font-semibold text-5xl my-10">Categories</h2>
+      <InfiniteMovingCards
+        items={collections}
+        direction="left"
+        speed="slow"
+      />
     </section>
-  )
+  );
 }
 
-export default Collections
+

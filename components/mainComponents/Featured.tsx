@@ -13,7 +13,7 @@ import { FiHeart } from 'react-icons/fi';
 const Bundles = () => {
   return (
     <section className="my-20 max-w-[1240px] mx-auto">
-      <h3 className={`${italiano.className} text-5xl mb-6 text-center`}>Bundles For You</h3>
+      <h3 className={`${italiano.className} text-3xl md:text-5xl mb-6 text-center`}>Bundles For You</h3>
        <Swiper
         modules={[Navigation]}
         spaceBetween={15}
@@ -29,7 +29,7 @@ const Bundles = () => {
       >
         {bundle.map((item, i) => (
           <SwiperSlide key={i}>
-            <div className='hover:scale-105 duration-300'>
+            <div className='hover:scale-105 duration-300 relative'>
               <Image
                 width={290}
                 height={350}
@@ -37,12 +37,13 @@ const Bundles = () => {
                 alt={item.title || 'Product'}
                 className="w-full md:h-[400px] object-cover cursor-pointer "
               />
+              <div className='bg-medium text-light px-4 py-1 rounded-md absolute text-sm top-3 left-3'>Sale</div>
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>
                     <h4 className="text-lg text-font font-[400]">{item.title}</h4>
                 </div>
                 <div className='flex justify-between items-center mt-2'>
-                    <p className='text-sm font-semibold  text-black'>PKR {item.price}</p>
+                    <p className='text-sm font-semibold  text-black'>PKR {item.onSale ? <> <span className='line-through text-gray-700'>{item.price}</span> <span className='text-base'>{item.discountPrice}</span></> : <span>{item.price}</span>}</p>
                 </div>
               </div>
             </div>

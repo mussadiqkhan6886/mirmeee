@@ -18,15 +18,15 @@ export const collections = [
 ]
 
 export const bundle = [
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: false, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
+    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
 ]
 
 export const reviews = [

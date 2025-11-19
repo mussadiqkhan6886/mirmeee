@@ -13,7 +13,7 @@ import { FiHeart } from 'react-icons/fi';
 const NewIn = () => {
   return (
     <section className="my-20 max-w-[1240px] mx-auto">
-      <h3 className={`${italiano.className} text-5xl mb-6 text-center`}>New in</h3>
+      <h3 className={`${italiano.className} text-3xl md:text-5xl mb-6 text-center`}>New in</h3>
        <Swiper
         modules={[Navigation]}
         spaceBetween={15}

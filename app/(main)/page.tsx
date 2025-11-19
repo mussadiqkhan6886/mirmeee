@@ -3,7 +3,7 @@ import Bundles from '@/components/mainComponents/Featured'
 import Hero from '@/components/mainComponents/Hero'
 import NewArrival from '@/components/mainComponents/NewArrival'
 import NewIn from '@/components/mainComponents/NewIn'
-import WhyUs from '@/components/mainComponents/WhyUs'
+import Reviews from '@/components/mainComponents/Reviews'
 import React from 'react'
 
 const Home = () => {
@@ -14,7 +14,7 @@ const Home = () => {
       <NewArrival />
       <Bundles />
       <NewIn />
-      <WhyUs />
+      <Reviews />
     </main>
   )
 }

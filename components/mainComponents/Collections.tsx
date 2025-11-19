@@ -8,7 +8,7 @@ export function MovingCollections() {
       <InfiniteMovingCards
         items={collections}
         direction="left"
-        speed="slow"
+        speed="normal"
       />
     </section>
   );

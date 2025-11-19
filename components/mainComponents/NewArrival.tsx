@@ -4,7 +4,7 @@ import React from 'react'
 
 const NewArrival = () => {
   return (
-    <section className='h-screen relative'>
+    <section className='h-[90vh] relative'>
       <Image src={"/new.jpg"} alt='is new arrival banner image' width={1000} height={1000} className='w-full h-full object-cover object-right' />
       <div className='absolute top-1/2 left-5 md:left-20 text-font flex flex-col items-start'>
         <h3 className='text-3xl md:text-5xl font-semibold uppercase'>Explore New Arrivals</h3>

@@ -50,7 +50,7 @@ const Products = ({data, heading}: Props) => {
               <div className='bg-medium text-light px-4 py-1 rounded-md absolute text-sm top-3 left-3'>Sale</div>
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>
-                    <h4 className="text-lg text-font font-[400]">{item.title}</h4>
+                    <h4 className="text-lg text-font font-normal">{item.title}</h4>
                 </div>
                 <div className='flex justify-between items-center mt-2'>
                     <p className='text-sm font-semibold  text-black'>PKR {item.onSale ? <> <span className='line-through text-gray-700'>{item.price}</span> <span className='text-base'>{item.discountPrice}</span></> : <span>{item.price}</span>}</p>

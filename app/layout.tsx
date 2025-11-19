@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { roboto } from "@/lib/fonts";
+import { CartContextProvider } from "@/context/CartContext";
 
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function RootLayout({
       <body
         className={`bg-light ${roboto.className} max-w-[1440px] mx-auto antialiased`}
       >
+        <CartContextProvider>
         {children}
+        </CartContextProvider>
       </body>
     </html>
   );

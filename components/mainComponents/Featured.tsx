@@ -21,7 +21,7 @@ const Bundles = () => {
         navigation
         loop
         breakpoints={{
-          320: { slidesPerView: 1 },
+          320: { slidesPerView: 2 },
           640: { slidesPerView: 2 },
           1024: { slidesPerView: 3 },
           1280: { slidesPerView: 4 },
@@ -35,7 +35,7 @@ const Bundles = () => {
                 height={350}
                 src={item.image}
                 alt={item.title || 'Product'}
-                className="w-full h-[400px] object-cover cursor-pointer "
+                className="w-full md:h-[400px] object-cover cursor-pointer "
               />
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>

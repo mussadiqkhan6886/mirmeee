@@ -21,7 +21,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-0" : " text-light lg:px-18 md:px-10 px-4 py-4"} fixed w-full max-w-[1440px]  border-b border-light z-10 duration-300`}>
+    <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-0" : " text-light lg:px-18 md:px-10 px-4 py-4"} fixed w-full max-w-[1440px]  border-b border-light z-50 duration-300`}>
       <div className='flex justify-between items-center'>
         <div>
             <Image src={"/logo.jpg"} alt='logo of shop' width={70} height={70} />
@@ -40,7 +40,7 @@ const Header = () => {
         </div>
       </div>
       
-      {sideBar && <nav className='flex lg:hidden items-center justify-center'>
+      {sideBar && <nav className='flex z-50 lg:hidden items-center justify-center'>
         <ul className='flex flex-col gap-8 items-center py-6'>
         {navigation.map(item => (
             <li key={item.title}><Link className='text-sm uppercase text-font' href={item.link}>{item.title}</Link></li>

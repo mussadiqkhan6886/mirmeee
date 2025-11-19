@@ -16,3 +16,37 @@
     }
   }
 }
+
+/* ===== Swiper Custom Styling ===== */
+.swiper {
+  padding-bottom: 3.5rem; /* space for pagination dots */
+}
+
+/* === Navigation Buttons === */
+.swiper-button-next,
+.swiper-button-prev {
+  background-color: white;
+  color: black;
+  border-radius: 9999px; /* full round */
+  width: 45px;
+  height: 45px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  top: 45%; /* vertically centered */
+}
+
+/* Move arrows slightly farther from edges */
+.swiper-button-next {
+  padding: 1rem !important;
+  font-size: 10rem !important;
+  color: rgb(0 0 0) !important;
+}
+
+.swiper-button-prev {
+ padding: 1rem !important;
+  font-size: 10rem !important;
+  color: rgb(0 0 0) !important;
+}
+
+
+

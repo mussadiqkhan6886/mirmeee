@@ -1,6 +1,5 @@
 'use client';
 
-import { bundle } from '@/lib/constants'
 import { italiano } from '@/lib/fonts';
 import React from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -8,12 +7,23 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
-import { FiHeart } from 'react-icons/fi';
 
-const Bundles = () => {
+type Props = {
+    data: {
+        image: string,
+        title: string,
+        link: string,
+        price: number
+        discountPrice: number
+        onSale: boolean
+    }[]
+    heading: string
+}
+
+const Products = ({data, heading}: Props) => {
   return (
     <section className="my-20 max-w-[1240px] mx-auto">
-      <h3 className={`${italiano.className} text-3xl md:text-5xl mb-6 text-center`}>Bundles For You</h3>
+      <h3 className={`${italiano.className} text-3xl md:text-5xl mb-6 text-center`}>{heading}</h3>
        <Swiper
         modules={[Navigation]}
         spaceBetween={15}
@@ -27,7 +37,7 @@ const Bundles = () => {
           1280: { slidesPerView: 4 },
         }}
       >
-        {bundle.map((item, i) => (
+        {data.map((item, i) => (
           <SwiperSlide key={i}>
             <div className='hover:scale-105 duration-300 relative'>
               <Image
@@ -54,4 +64,4 @@ const Bundles = () => {
   )
 }
 
-export default Bundles
+export default Products

@@ -1,9 +1,9 @@
 import { MovingCollections } from '@/components/mainComponents/Collections'
-import Bundles from '@/components/mainComponents/Featured'
 import Hero from '@/components/mainComponents/Hero'
 import NewArrival from '@/components/mainComponents/NewArrival'
-import NewIn from '@/components/mainComponents/NewIn'
+import Products from '@/components/mainComponents/Products'
 import Reviews from '@/components/mainComponents/Reviews'
+import { bundle } from '@/lib/constants'
 import React from 'react'
 
 const Home = () => {
@@ -12,8 +12,9 @@ const Home = () => {
       <Hero />
       <MovingCollections />
       <NewArrival />
-      <Bundles />
-      <NewIn />
+      <Products data={bundle} heading='Bundles For You' />
+      <Products data={bundle} heading='New In' />
+      <Products data={bundle} heading='Formals' />
       <Reviews />
     </main>
   )

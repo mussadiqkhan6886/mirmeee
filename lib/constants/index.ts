@@ -5,6 +5,7 @@ export const navigation = [
     {title: "Flower Clips", link: "/collections/flower-clips"},
     {title: "Scrunchies", link: "/collections/scrunchies"},
     {title: "Headbands", link: "/collections/head-bands"},
+    {title: "Formals", link: "/collections/formals"},
     {title: "All Accessories", link: "/collections/all"},
 ]
 
@@ -14,6 +15,7 @@ export const collections = [
     {title: "Flower Clips", link: "/collections/flower-clips" ,image: "/flowerClips.jpg"},
     {title: "Scrunchies", link: "/collections/scrunchies" ,image: "/scrunchies.jfif"},
     {title: "Headbands", link: "/collections/head-bands" ,image: "/headbands.jpg"},
+    {title: "Formals", link: "/collections/formals" ,image: "/headbands.jpg"},
     {title: "All Accessories", link: "/collections/all" ,image: "/all.jpg"},
 ]
 

@@ -19,18 +19,6 @@ export const collections = [
     {title: "All Accessories", link: "/collections/all" ,image: "/all.jpg"},
 ]
 
-export const bundle = [
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: false, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-    {title: "bundle 1", link: "#", image: "/flowerClips.jpg", price: 1200, onSale: true, discountPrice: 990},
-]
-
 export const reviews = [
   {
     id: 1,

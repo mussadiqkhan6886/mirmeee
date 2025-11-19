@@ -10,7 +10,7 @@ import Image from 'next/image';
 
 type Props = {
     data: {
-        image: string,
+        image: string[],
         title: string,
         link: string,
         price: number
@@ -43,7 +43,7 @@ const Products = ({data, heading}: Props) => {
               <Image
                 width={290}
                 height={350}
-                src={item.image}
+                src={item.image[0]}
                 alt={item.title || 'Product'}
                 className="w-full md:h-[400px] object-cover cursor-pointer "
               />

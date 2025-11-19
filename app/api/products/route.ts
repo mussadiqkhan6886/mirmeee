@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import cloudinary from "@/lib/config/cloudinary";
-import { connectDB } from "@/lib/config/database/db";
 import { Product } from "@/lib/models/ProductSchema";
+import { connectDB } from "@/lib/config/database/db";
+import cloudinary from "@/lib/config/cloudinary";
 
 export const runtime = "nodejs"; // Required for Cloudinary uploads
 
@@ -22,19 +22,21 @@ export async function POST(req: NextRequest) {
     const formData = await req.formData();
 
     const collection = formData.get("collection")?.toString() || "";
+    const collectionSlug = formData.get("collectionSlug")?.toString()
     const name = formData.get("name")?.toString() || "";
     const slug = formData.get("slug")?.toString() || "";
     const description = formData.get("description")?.toString() || "";
     const price = Number(formData.get("price"));
-    const stock = Number(formData.get("stock"));
-    const newPrice = Number(formData.get("newPrice")) || null;
+    const discountPrice = Number(formData.get("discountPrice")) || null;
     const onSale = formData.get("onSale") === "true";
     const colors = formData.getAll("colors").map((c) => c.toString());
+    const size = formData.getAll("size").map((c) => c.toString());
     const files = formData.getAll("images");
     const inStock = formData.get("inStock") === "true";
+    const bundle = formData.get("bundle") === "true";
 
     
-    if (!collection || !name || !description || !price || !stock) {
+    if (!collection || !name || !description || !price) {
       throw new Error("Missing required fields");
     }
     
@@ -56,7 +58,7 @@ export async function POST(req: NextRequest) {
         cloudinary.uploader
           .upload_stream(
             {
-              folder: "mzstore",
+              folder: "mirmee",
               resource_type: "image",
             },
             (error, result) => {
@@ -72,16 +74,18 @@ export async function POST(req: NextRequest) {
       
       const newProduct = new Product({
         collection,
+        collectionSlug,
         slug,
         name,
         description,
         price,
-        stock,
-      newPrice,
-      onSale,
-      colors,
-      inStock,
-      images: uploadedImages,
+        size,
+        discountPrice,
+        onSale,
+        colors,
+        inStock,
+        bundle,
+        images: uploadedImages,
     });
     await newProduct.save();
 

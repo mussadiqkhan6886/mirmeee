@@ -16,6 +16,7 @@ interface Order {
     name: string;
     quantity: number;
     selectedColor: string
+    selectedSize: string
   }[];
   orderId: string;
   userDetails: {
@@ -30,8 +31,8 @@ interface Order {
   };
   totalPrice: number;
   status: string;
-  paymentMethod: string;
-  paymentProof?: string;
+  // paymentMethod: string;
+  // paymentProof?: string;
   createdAt: string;
 }
 
@@ -45,8 +46,8 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
       phone: order.userDetails.phone,
       totalPrice: order.totalPrice,
       status: order.status,
-      paymentMethod: order.paymentMethod,
-      paymentProof: order.paymentProof || "",
+      // paymentMethod: order.paymentMethod,
+      // paymentProof: order.paymentProof || "",
       date: new Date(order.createdAt).toLocaleDateString(),
       address: order.shippingAddress.address,
       items: order.items,
@@ -89,7 +90,7 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
                 height={40}
                 className="rounded-md object-cover border"
               />
-              <span className="text-sm">{item.name} × {item.quantity} - ({item.selectedColor})</span>
+              <span className="text-sm">{item.name} × {item.quantity} - ({item.selectedColor || item.selectedSize})</span>
             </div>
           ))}
         </div>
@@ -161,30 +162,30 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
         );
       },
     },
-    { field: "paymentMethod", headerName: "Payment", width: 130 },
-    {
-  field: "paymentProof",
-  headerName: "Payment Proof",
-  width: 160,
-  renderCell: (params) =>
-    params.value ? (
-      <Link
-        href={params.value}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Image
-          src={params.value}
-          alt="Payment Proof"
-          width={50}
-          height={50}
-          className="rounded border object-cover"
-        />
-      </Link>
-    ) : (
-      <span className="text-gray-400 text-sm">No Proof</span>
-    ),
-},
+    // { field: "paymentMethod", headerName: "Payment", width: 130 },
+//     {
+//   field: "paymentProof",
+//   headerName: "Payment Proof",
+//   width: 160,
+//   renderCell: (params) =>
+//     params.value ? (
+//       <Link
+//         href={params.value}
+//         target="_blank"
+//         rel="noopener noreferrer"
+//       >
+//         <Image
+//           src={params.value}
+//           alt="Payment Proof"
+//           width={50}
+//           height={50}
+//           className="rounded border object-cover"
+//         />
+//       </Link>
+//     ) : (
+//       <span className="text-gray-400 text-sm">No Proof</span>
+//     ),
+// },
     { field: "date", headerName: "Date", width: 120 },
     { field: "phone", headerName: "Phone", width: 120 },
     { field: "address", headerName: "Address", width: 280 },

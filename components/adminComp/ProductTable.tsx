@@ -49,7 +49,7 @@ export default function ProductTable({ products }: ProductTableProps) {
     { field: 'name', headerName: 'Product Name', flex: 1, minWidth: 100 },
     { field: 'price', headerName: 'Price', type: 'number', width: 100, },
     {
-      field: 'newPrice',
+      field: 'discountPrice',
       headerName: 'Discount Price',
       type: 'number',
       width: 130,
@@ -68,10 +68,10 @@ export default function ProductTable({ products }: ProductTableProps) {
       type: 'boolean',
     },
     {
-      field: 'stock',
-      headerName: 'Stock',
+      field: 'size',
+      headerName: 'Size',
       width: 80,
-      type: 'number',
+      type: 'string',
     },
     {
       field: 'colors',

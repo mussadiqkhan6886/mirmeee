@@ -12,8 +12,11 @@ const productSubSchema = new mongoose.Schema({
   images: { type: [String], required: true },
   colors: { type: [String], default: [] },
   size: { type: [String], default: []},
-  slug: {type: String, required: true},
-});
+  slug: {type: String, required: true}, 
+  bundle: {type: Boolean, default: false}
+},
+{ timestamps: true }
+);
 
 export const Product =
   mongoose.models.Product || mongoose.model("Product", productSubSchema);

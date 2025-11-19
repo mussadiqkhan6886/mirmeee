@@ -1,10 +1,10 @@
 "use client";
 
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import Image from "next/image";
 import imageCompression from "browser-image-compression";
-import { collectionsData } from "@/lib/constants"; // adjust path
+import { collections } from "@/lib/constants";
 
 const AddProduct = () => {
   const [files, setFiles] = useState<File[]>([]);
@@ -14,32 +14,43 @@ const AddProduct = () => {
 
   const [data, setData] = useState({
     collection: "",
+    collectionSlug: "",
     slug: "",
     name: "",
-    description: "",     // Product description
+    description: "",
     price: "",
-    newPrice: "",        // optional
+    discountPrice: "",
+    size: [] as string[],
     onSale: false,
     inStock: true,
     colors: [] as string[],
     images: [] as string[],
-    stock: ""
+    bundle: false
   });
 
+  // Slug generator
+  const toSlug = (str: string) =>
+    str
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, "-")
+      .replace(/[^a-z0-9-]/g, "")
+      .replace(/-+/g, "-")
+      .replace(/^-|-$/g, "");
+
+  // Auto computed slugs
+  const productSlug = useMemo(() => toSlug(data.name), [data.name]);
+  const collectionSlug = useMemo(() => toSlug(data.collection), [data.collection]);
+
+  // Update slugs into state ONLY when needed
   useEffect(() => {
-  if (data.name) {
-    const slug = data.name
-      .toLowerCase()                       // lowercase
-      .trim()                               // remove leading/trailing spaces
-      .replace(/\s+/g, "-")                 // replace spaces with hyphens
-      .replace(/[^a-z0-9-]/g, "")           // remove invalid characters
-      .replace(/-+/g, "-")                  // replace multiple hyphens with single
-      .replace(/^-|-$/g, "");               // remove leading/trailing hyphens
-    setData((prev) => ({ ...prev, slug }));
-  } else {
-    setData((prev) => ({ ...prev, slug: "" }));
-  }
-}, [data.name]);
+    setData(prev => ({
+      ...prev,
+      slug: productSlug,
+      collectionSlug: collectionSlug,
+    }));
+  }, [productSlug, collectionSlug]);
+
 
   // @ts-ignore
   const handleChange = (
@@ -59,10 +70,21 @@ const AddProduct = () => {
     updated[index] = value;
     setData({ ...data, colors: updated });
   };
+  const handleSizeChange = (index: number, value: string) => {
+    const updated = [...data.size];
+    updated[index] = value;
+    setData({ ...data, size: updated });
+  };
 
   const addColor = () => setData({ ...data, colors: [...data.colors, ""] });
+
+  const addSize = () => setData({ ...data, size: [...data.size, ""] });
+
   const removeColor = (index: number) =>
     setData({ ...data, colors: data.colors.filter((_, i) => i !== index) });
+
+  const removeSize = (index: number) =>
+    setData({ ...data, size: data.size.filter((_, i) => i !== index) });
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -104,16 +126,18 @@ const AddProduct = () => {
         setResult("✅ Product added successfully!");
         setData({
           collection: "",
+          collectionSlug: "",
           slug: "",
           name: "",
           description: "",
           price: "",
-          newPrice: "",
+          discountPrice: "",
           onSale: false,
-          inStock: false,
+          inStock: true,
           colors: [],
           images: [],
-          stock: ""
+          size: [],
+          bundle: false
         });
         setFiles([]);
         setPreviews([]);
@@ -142,12 +166,22 @@ const AddProduct = () => {
             required
           >
             <option value="">Select Collection</option>
-            {collectionsData.map((col) => (
-              <option key={col.slug} value={col.title}>
+            {collections.slice(0,6).map((col) => (
+              <option key={col.link} value={col.title}>
                 {col.title}
               </option>
             ))}
           </select>
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-1">Collection Slug</label>
+          <input
+            name="collectionSlug"
+            value={data.collectionSlug}
+            readOnly
+            className="w-full border rounded-lg p-2 bg-gray-100"
+          />
         </div>
 
 
@@ -199,18 +233,6 @@ const AddProduct = () => {
             required
           />
         </div>
-        <div>
-          <label className="block font-semibold mb-1">Stock</label>
-          <input
-            name="stock"
-            type="number"
-            value={data.stock}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-2"
-            required
-          />
-        </div>
-
         {/* On Sale */}
         <div className="flex items-center gap-2">
           <input
@@ -232,13 +254,23 @@ const AddProduct = () => {
           <label className="font-semibold">In Stock</label>
         </div>
 
+        <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="bundle"
+            checked={data.bundle}
+            onChange={handleChange}
+          />
+          <label className="font-semibold">Bundle</label>
+        </div>
+
         {data.onSale && (
           <div>
-            <label className="block font-semibold mb-1">New Price</label>
+            <label className="block font-semibold mb-1">Discount Price</label>
             <input
-              name="newPrice"
+              name="discountPrice"
               type="number"
-              value={data.newPrice}
+              value={data.discountPrice}
               onChange={handleChange}
               className="w-full border rounded-lg p-2"
               required
@@ -264,6 +296,27 @@ const AddProduct = () => {
             </div>
           ))}
           <button type="button" onClick={addColor} className="text-sm text-blue-600">
+            + Add Color
+          </button>
+        </div>
+
+        <div>
+          <label className="block font-semibold mb-2">Size</label>
+          {data.size.map((clr, i) => (
+            <div key={i} className="flex items-center gap-2 mb-2">
+              <input
+                type="text"
+                value={clr}
+                onChange={(e) => handleSizeChange(i, e.target.value)}
+                className="w-full border rounded-lg p-2"
+                placeholder={`Size ${i + 1}`}
+              />
+              <button type="button" onClick={() => removeSize(i)} className="text-red-500">
+                ✕
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addSize} className="text-sm text-blue-600">
             + Add Color
           </button>
         </div>

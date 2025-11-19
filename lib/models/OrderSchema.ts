@@ -21,7 +21,7 @@ const OrderSchema = new Schema({
         type: Boolean,
         default: false,
       },
-      newPrice: {
+      discountPrice: {
         type: Number,
         default: null,
       },
@@ -39,6 +39,10 @@ const OrderSchema = new Schema({
         required: false,
         default: "",
       },
+      selectedSize: {
+        type: String,
+        default: ""
+      }
     }
     ],
     totalPrice: { type: Number, required: true },
@@ -59,17 +63,17 @@ const OrderSchema = new Schema({
       postalCode: { type: String },
       address: {type: String, required: true}
     },
-    paymentMethod: {
-      type: String,
-      enum: ["cod", "easypaisa"],
-      default: "cod"
-    },
-    paymentProof: {
-      type: String,
-      required: function(){
-        return this.paymentMethod !== "cod"
-      } 
-    }
+    // paymentMethod: {
+    //   type: String,
+    //   enum: ["cod", "easypaisa"],
+    //   default: "cod"
+    // },
+    // paymentProof: {
+    //   type: String,
+    //   required: function(){
+    //     return this.paymentMethod !== "cod"
+    //   } 
+    // }
   },
   { timestamps: true }
 )

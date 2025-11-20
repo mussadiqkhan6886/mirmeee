@@ -20,7 +20,6 @@ export async function POST(req: NextRequest) {
 
   try {
     const formData = await req.formData();
-
     const collection = formData.get("collection")?.toString() || "";
     const collectionSlug = formData.get("collectionSlug")?.toString()
     const name = formData.get("name")?.toString() || "";

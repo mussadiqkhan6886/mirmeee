@@ -1,19 +1,22 @@
-interface Product {
-  collection: string,
+interface ProductType {
+  _id: string
+  name: string
+  slug: string
+  price: number
+  discountPrice?: number
+  description: string
+  images: string[]
+  inStock: boolean
+  colors: string[]
+  size?: string[]
+  collection: string
   collectionSlug: string
-  name: string;
-  description: string;
-  price: number;
-  discountPrice: number | null;
-  onSale: boolean;
-  images: string[];
-  colors: string[];
-  size: string[]
-  slug: string;
-  inStock: boolean;
-  stock: number
-  _id: string; // MongoDB document ID
+  bundle: boolean        // 👈 add this
+  onSale: boolean
+  createdAt: string
+  updatedAt: string
 }
+
 
 interface reviewType {
   _id: string

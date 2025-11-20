@@ -9,14 +9,7 @@ import 'swiper/css/navigation';
 import Image from 'next/image';
 
 type Props = {
-    data: {
-        image: string[],
-        title: string,
-        link: string,
-        price: number
-        discountPrice: number
-        onSale: boolean
-    }[]
+    data: ProductType[]
     heading: string
 }
 
@@ -43,14 +36,14 @@ const Products = ({data, heading}: Props) => {
               <Image
                 width={290}
                 height={350}
-                src={item.image[0]}
-                alt={item.title || 'Product'}
+                src={item.images[0]}
+                alt={item.name || 'Product'}
                 className="w-full md:h-[400px] object-cover cursor-pointer "
               />
               <div className='bg-medium text-light px-4 py-1 rounded-md absolute text-sm top-3 left-3'>Sale</div>
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>
-                    <h4 className="text-lg text-font font-normal">{item.title}</h4>
+                    <h4 className="text-lg text-font font-normal">{item.name}</h4>
                 </div>
                 <div className='flex justify-between items-center mt-2'>
                     <p className='text-sm font-semibold  text-black'>PKR {item.onSale ? <> <span className='line-through text-gray-700'>{item.price}</span> <span className='text-base'>{item.discountPrice}</span></> : <span>{item.price}</span>}</p>

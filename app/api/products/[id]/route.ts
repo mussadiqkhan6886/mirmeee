@@ -6,7 +6,7 @@ import { connectDB } from "@/lib/config/database/db"
 export const GET = async (_req: NextRequest, {params}: {params: Promise<{id: string}>}) => {
     await connectDB()
     const {id} = await params
-    const product = await Product.findById(id);
+    const product = await Product.findOne({slug: id})
 
     if (!product) {
       return NextResponse.json({ success: false, message: "Product not found" }, { status: 404 });

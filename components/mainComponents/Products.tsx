@@ -7,6 +7,7 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 
 type Props = {
     data: ProductType[]
@@ -33,13 +34,15 @@ const Products = ({data, heading}: Props) => {
         {data.map((item, i) => (
           <SwiperSlide key={i}>
             <div className='hover:scale-105 duration-300 relative'>
-              <Image
-                width={290}
-                height={350}
-                src={item.images[0]}
-                alt={item.name || 'Product'}
-                className="w-full md:h-[400px] object-cover cursor-pointer "
-              />
+              <Link href={`collections/${item.collectionSlug}/${item.slug}`}>
+                <Image
+                  width={290}
+                  height={350}
+                  src={item.images[0]}
+                  alt={item.name || 'Product'}
+                  className="w-full md:h-[400px] object-cover cursor-pointer "
+                />
+              </Link>
               <div className='bg-medium text-light px-4 py-1 rounded-md absolute text-sm top-3 left-3'>Sale</div>
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>

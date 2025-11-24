@@ -1,4 +1,3 @@
-import { montserrat } from "@/lib/fonts";
 import "@/app/globals.css"
 import Header from "@/components/adminComp/Header";
 import { Metadata } from "next";

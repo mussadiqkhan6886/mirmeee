@@ -7,7 +7,7 @@ type Props = {
   images: string[];
   price: number;
   slug: string;
-  discountPrice: number;
+  discountPrice?: number;
   onSale: boolean;
   oldSlug?: string;
   inStock: boolean;

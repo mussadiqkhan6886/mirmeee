@@ -31,7 +31,7 @@ useEffect(() => {
 
 
   return (
-    <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-0" : " text-light lg:px-18 md:px-10 px-4 py-4"} fixed w-full max-w-[1440px]  border-b border-light z-50 duration-300`}>
+    <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-0" : " text-light lg:px-18 md:px-10 px-4 py-4"} fixed top-0 w-full max-w-[1440px]  border-b border-light z-50 duration-300`}>
       <div className='flex justify-between items-center'>
         <div>
             <Image src={"/logo.jpg"} alt='logo of shop' width={70} height={70} />

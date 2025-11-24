@@ -62,7 +62,6 @@ const Products = async ({params}: {params: Promise<{slug: string}>}) => {
     );
   }
 
-  console.log(productData)
 
   return (
     <main className="max-w-7xl mx-auto my-16 px-4 xl:px-0 pt-24">

@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
-import { connectDB } from "@/lib/config/database/db";
 import order from "@/lib/models/OrderSchema";
+import { connectDB } from "@/lib/config/database/db";
 
 interface ItemType {
   _id: number
@@ -10,12 +9,14 @@ interface ItemType {
   name: string
   quantity: number
   price: number
-  newPrice: number
+  discountPrice: number
   selectedColor: string
+  selectedSize: string
   onSale: boolean
 }
 
 import type { Metadata } from 'next';
+import { CheckCircle } from "lucide-react";
 
 export const generateMetadata = (): Metadata => {
   return {
@@ -34,7 +35,7 @@ const ThankYouPage = async ({ params }: { params: Promise<{ id: string }> }) => 
   return (
     <main className="flex flex-col pt-24 justify-center items-center min-h-screen bg-gray-50 px-5">
       <div className="bg-white shadow-md rounded-lg p-10 text-center max-w-2xl w-full">
-        <FaCheckCircle className="text-green-500 text-6xl mx-auto mb-6" />
+        <CheckCircle size={36} color="green" className="text-center mx-auto my-4" />
         <h1 className="text-xl md:text-3xl font-bold text-gray-800 mb-4">
           Thank You for Your Order!
         </h1>
@@ -81,21 +82,21 @@ const ThankYouPage = async ({ params }: { params: Promise<{ id: string }> }) => 
                     className="w-12 h-12 rounded-md object-cover"
                   />
                   <div>
-                    <p className="font-semibold text-gray-800">{item.name} - {item.selectedColor}</p>
+                    <p className="font-semibold text-gray-800">{item.name} - {item.selectedColor || item.selectedSize}</p>
                     <p className="text-sm text-gray-600">
-                      {item.quantity} × Rs.{item.newPrice}
+                      {item.quantity} × Rs.{item.discountPrice}
                     </p>
                   </div>
                 </div>
                 <p className="font-semibold text-gray-800">
-                  Rs.{item.onSale ? item.quantity * item.newPrice : item.quantity * item.price} 
+                  Rs.{item.onSale ? item.quantity * item.discountPrice : item.quantity * item.price} 
                 </p>
               </div>
             ))}
           </div>
           <div className="flex justify-between pt-3 items-center">
             <p className="font-semibold">Shipping Cost</p>
-            <p className="font-semibold">Rs. 300</p>
+            <p className="font-semibold">Rs. 0</p>
             </div>
           <div className="mt-4 border-t pt-3 text-right">
             <p className="text-lg font-bold text-gray-800">

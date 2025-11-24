@@ -130,7 +130,7 @@ const Page = () => {
 
           <div className="flex justify-between mb-2 text-gray-600">
             <p>Shipping</p>
-            <p>Calculated at checkout</p>
+            <p>Free Shipping</p>
           </div>
 
           <hr className="my-4 border-gray-300" />

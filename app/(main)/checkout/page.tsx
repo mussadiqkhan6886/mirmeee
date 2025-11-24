@@ -55,7 +55,7 @@ const Checkout = () => {
         selectedColor: item.selectedColor || "",
         selectedSize: item.selectedSize,
       })),
-      totalPrice: totalAmount + 300,
+      totalPrice: totalAmount,
       userDetails: {
         fullName: formData.fullName,
         phone: formData.phone,

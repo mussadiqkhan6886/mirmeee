@@ -13,7 +13,8 @@ const productSubSchema = new mongoose.Schema({
   colors: { type: [String], default: [] },
   size: { type: [String], default: []},
   slug: {type: String, required: true}, 
-  bundle: {type: Boolean, default: false}
+  bundle: {type: Boolean, default: false},
+  stock: {type: Number, required: true}
 },
 { timestamps: true }
 );

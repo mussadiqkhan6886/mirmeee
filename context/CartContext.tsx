@@ -3,11 +3,11 @@ import { createContext, useState, useEffect, ReactNode, Dispatch, SetStateAction
 
 // 🧱 Define item type
 export interface CartItem {
-  id: string;
+  id: number;
   name: string;
   price: number;
   onSale: boolean;
-  newPrice: number | null
+  discountPrice: number | null
   quantity: number;
   images: string[];
   selectedColor?: string
@@ -36,7 +36,7 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
 
   // 🧮 Recalculate totals
   useEffect(() => {
-    const amount = cart.reduce((sum, item) => item.onSale ? sum + item.newPrice! * item.quantity : sum + item.price * item.quantity, 0);
+    const amount = cart.reduce((sum, item) => item.onSale ? sum + item.discountPrice! * item.quantity : sum + item.price * item.quantity, 0);
     const items = cart.reduce((sum, item) => sum + item.quantity, 0);
     setTotalAmount(amount);
     setTotalItems(items);
@@ -44,29 +44,36 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
 
   // ➕ Add item
     const addToCart = (newItem: CartItem) => {
-      setCart((prev) => {
-        const existing = prev.find(
-          (item) => item.id === newItem.id && item.selectedColor === newItem.selectedColor
-        );
+  setCart((prev) => {
+    const existing = prev.find(
+      (item) =>
+        item.id === newItem.id &&
+        item.selectedColor === newItem.selectedColor &&
+        item.selectedSize === newItem.selectedSize
+    );
 
-        if (existing) {
-          // Ensure quantity does not exceed stock
-          const updatedQuantity = Math.min(
-            existing.quantity + newItem.quantity,
-            newItem.stock
-          );
-          return prev.map((item) =>
-            item.id === newItem.id && item.selectedColor === newItem.selectedColor
-              ? { ...item, quantity: updatedQuantity }
-              : item
-          );
-        }
+    if (existing) {
+      // Ensure quantity does not exceed stock
+      const updatedQuantity = Math.min(
+        existing.quantity + newItem.quantity,
+        newItem.stock
+      );
 
-        // If new item, don't allow quantity greater than stock
-        const quantity = Math.min(newItem.quantity, newItem.stock);
-        return [...prev, { ...newItem, quantity }];
-      });
-    };
+      return prev.map((item) =>
+        item.id === newItem.id &&
+        item.selectedColor === newItem.selectedColor &&
+        item.selectedSize === newItem.selectedSize
+          ? { ...item, quantity: updatedQuantity }
+          : item
+      );
+    }
+
+    // New item — also respect stock
+    const quantity = Math.min(newItem.quantity, newItem.stock);
+    return [...prev, { ...newItem, quantity }];
+  });
+};
+
 
   // ❌ Remove item
   const removeFromCart = (id: number) => {

@@ -28,6 +28,7 @@ export async function POST(req: NextRequest) {
     const price = Number(formData.get("price"));
     const discountPrice = Number(formData.get("discountPrice")) || null;
     const onSale = formData.get("onSale") === "true";
+    const stock = Number(formData.get("stock"));
     const colors = formData.getAll("colors").map((c) => c.toString());
     const size = formData.getAll("size").map((c) => c.toString());
     const files = formData.getAll("images");
@@ -35,7 +36,7 @@ export async function POST(req: NextRequest) {
     const bundle = formData.get("bundle") === "true";
 
     
-    if (!collection || !name || !description || !price) {
+    if (!collection || !name || !description || !price || !stock) {
       throw new Error("Missing required fields");
     }
     
@@ -79,6 +80,7 @@ export async function POST(req: NextRequest) {
         description,
         price,
         size,
+        stock,
         discountPrice,
         onSale,
         colors,

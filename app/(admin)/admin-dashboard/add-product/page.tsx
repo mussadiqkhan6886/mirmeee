@@ -23,6 +23,7 @@ const AddProduct = () => {
     size: [] as string[],
     onSale: false,
     inStock: true,
+    stock: "",
     colors: [] as string[],
     images: [] as string[],
     bundle: false
@@ -133,6 +134,7 @@ const AddProduct = () => {
           price: "",
           discountPrice: "",
           onSale: false,
+          stock: "",
           inStock: true,
           colors: [],
           images: [],
@@ -228,6 +230,17 @@ const AddProduct = () => {
             name="price"
             type="number"
             value={data.price}
+            onChange={handleChange}
+            className="w-full border rounded-lg p-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block font-semibold mb-1">Stock</label>
+          <input
+            name="stock"
+            type="number"
+            value={data.stock}
             onChange={handleChange}
             className="w-full border rounded-lg p-2"
             required

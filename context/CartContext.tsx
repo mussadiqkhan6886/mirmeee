@@ -3,14 +3,15 @@ import { createContext, useState, useEffect, ReactNode, Dispatch, SetStateAction
 
 // 🧱 Define item type
 export interface CartItem {
-  id: number;
+  id: string;
   name: string;
   price: number;
   onSale: boolean;
   newPrice: number | null
   quantity: number;
   images: string[];
-  selectedColor: string
+  selectedColor?: string
+  selectedSize?: string,
   stock: number
 }
 

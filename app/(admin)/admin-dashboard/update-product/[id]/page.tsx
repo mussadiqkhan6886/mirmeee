@@ -17,13 +17,15 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
     name: "",
     description: "",
     price: "",
-    newPrice: "",
+    discountPrice: "",
     onSale: false,
     colors: [] as string[],
     images: [] as string[],
     slug: "",
     inStock: true,
-    stock: ""
+    stock: "",
+    size: [] as string[],
+    bundle: false
   });
 
   const router = useRouter();
@@ -37,16 +39,18 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
         const product = res.data.product;
         
         setData({
+          bundle: product.bundle || false,
           name: product.name || "",
           description: product.description || "",
           price: product.price || "",
-          newPrice: product.newPrice || "",
+          discountPrice: product.discountPrice || "",
           onSale: product.onSale || false,
           colors: product.colors || [],
           images: product.images || [],
           slug: product.slug || "",
           inStock: product.inStock || false,
-          stock: product.stock
+          stock: product.stock,
+          size: product.size
         });
 
         setExistingImages(product.images || []);
@@ -88,6 +92,16 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
   const addColor = () => setData({ ...data, colors: [...data.colors, ""] });
   const removeColor = (index: number) =>
     setData({ ...data, colors: data.colors.filter((_, i) => i !== index) });
+
+  const handleSizeChange = (index: number, value: string) => {
+    const updated = [...data.size];
+    updated[index] = value;
+    setData({ ...data, size: updated });
+  };
+
+  const addSize = () => setData({ ...data, size: [...data.size, ""] });
+  const removeSize = (index: number) =>
+    setData({ ...data, size: data.size.filter((_, i) => i !== index) });
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -234,13 +248,23 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
           <label className="font-semibold">In Stock</label>
         </div>
 
+         <div className="flex items-center gap-2">
+          <input
+            type="checkbox"
+            name="bundle"
+            checked={data.bundle}
+            onChange={handleChange}
+          />
+          <label className="font-semibold">Bundle</label>
+        </div>
+
         {data.onSale && (
           <div>
-            <label className="block font-semibold mb-1">New Price</label>
+            <label className="block font-semibold mb-1">DIscount Price</label>
             <input
-              name="newPrice"
+              name="discountPrice"
               type="number"
-              value={data.newPrice}
+              value={data.discountPrice}
               onChange={handleChange}
               className="w-full border rounded-lg p-2"
               required
@@ -267,6 +291,26 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
           ))}
           <button type="button" onClick={addColor} className="text-sm text-blue-600">
             + Add Color
+          </button>
+        </div>
+        <div>
+          <label className="block font-semibold mb-2">Size</label>
+          {data.size.map((s, i) => (
+            <div key={i} className="flex items-center gap-2 mb-2">
+              <input
+                type="text"
+                value={s}
+                onChange={(e) => handleSizeChange(i, e.target.value)}
+                className="w-full border rounded-lg p-2"
+                placeholder={`Size ${i + 1}`}
+              />
+              <button type="button" onClick={() => removeSize(i)} className="text-red-500">
+                ✕
+              </button>
+            </div>
+          ))}
+          <button type="button" onClick={addSize} className="text-sm text-blue-600">
+            + Add Size
           </button>
         </div>
 

@@ -330,7 +330,7 @@ const AddProduct = () => {
             </div>
           ))}
           <button type="button" onClick={addSize} className="text-sm text-blue-600">
-            + Add Color
+            + Add Size
           </button>
         </div>
 

@@ -20,7 +20,7 @@ interface ProductType {
 
 interface reviewType {
   _id: string
-  designation: string
+  rating: string
   name: string
   message: string
 }

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 const AddTestimonialPage = () => {
   const [form, setForm] = useState({
     name: "",
-    designation: "",
+    rating: "",
     message: "",
   });
   const [result,setResult] = useState("")
@@ -22,9 +22,9 @@ const AddTestimonialPage = () => {
       const res = await axios.post("/api/testimonials", form);
       if (res.data.success) {
         setResult("Testimonial added successfully!")
-        setForm({ name: "", designation: "", message: "" });
+        setForm({ name: "", rating: "", message: "" });
         setTimeout(() => {
-          router.push("/")
+          router.push("/admin-dashboard")
         }, 1500)
       } else {
         setResult("Failed to add testimonial.");
@@ -38,7 +38,7 @@ const AddTestimonialPage = () => {
   return (
     <div className="max-w-xl mx-auto py-16 px-6">
       <h1 className="text-3xl font-semibold text-center text-main mb-10">
-        Add Testimonial
+        Add Review
       </h1>
 
       <form
@@ -58,11 +58,12 @@ const AddTestimonialPage = () => {
         </div>
 
         <div>
-          <label className="block mb-1 text-gray-700">Designation</label>
+          <label className="block mb-1 text-gray-700">Stars</label>
           <input
-            type="text"
-            name="designation"
-            value={form.designation}
+            type="number"
+            max={5}
+            name="rating"
+            value={form.rating}
             onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg p-2 focus:outline-none focus:border-main"
             required

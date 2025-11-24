@@ -40,12 +40,14 @@ export const PATCH = async (
     const name = formData.get("name") as string;
     const description = formData.get("description") as string;
     const price = Number(formData.get("price"));
-    const newPrice = formData.get("newPrice") ? Number(formData.get("newPrice")) : null;
+    const discountPrice = formData.get("discountPrice") ? Number(formData.get("discountPrice")) : null;
     const stock = Number(formData.get("stock"))
     const onSale = formData.get("onSale") === "true";
     const colors = formData.getAll("colors").map(c => c.toString());
+    const size = formData.getAll("size").map(c => c.toString());
     const slug = formData.get("slug") as string
     const inStock = formData.get("inStock") === "true";
+    const bundle = formData.get("bundle") === "true";
     const files = formData.getAll("images") as File[];
     const uploadedImages: string[] = [];
 
@@ -56,7 +58,7 @@ export const PATCH = async (
         }
       const buffer = Buffer.from(await file.arrayBuffer());
       const uploadRes = await new Promise((resolve, reject) => {
-        cloudinary.uploader.upload_stream({ folder: "mzstore" }, (err, res) => {
+        cloudinary.uploader.upload_stream({ folder: "mirmee" }, (err, res) => {
           if (err) reject(err);
           else resolve(res);
         }).end(buffer);
@@ -80,9 +82,11 @@ export const PATCH = async (
       description,
       price,
       stock,
-      newPrice,
+      bundle,
+      discountPrice,
       onSale,
       colors,
+      size,
       inStock,
       images: updatedImages, // just overwrite with merged array
     };

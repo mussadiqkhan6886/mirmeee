@@ -16,7 +16,7 @@ const Checkout = () => {
     city: "",
     postalCode: "",
     notes: "",
-    paymentMethod: "cod"
+    // paymentMethod: "cod"
   });
 
   const { cart, totalAmount, clearCart } = useCart();
@@ -53,6 +53,7 @@ const Checkout = () => {
         quantity: item.quantity,
         images: item.images[0],
         selectedColor: item.selectedColor || "",
+        selectedSize: item.selectedSize,
       })),
       totalPrice: totalAmount + 300,
       userDetails: {
@@ -174,12 +175,13 @@ const Checkout = () => {
             </div>
             <div className="text-black text-center border py-2 md:col-span-2">
               <p>Payment Method</p>
-              <p>{formData.paymentMethod}</p>
+              <p>Cash on delivery </p>
+              {/* <p>{formData.paymentMethod}</p>
               <select value={formData.paymentMethod} onChange={handleChange} name="paymentMethod">
                 <option value="cod">Cash on Delivery</option>
                 {/* <option value="easypaisa">Easypaisa</option> */}
                 {/* <option value="card">Bank Payment</option> */}
-              </select>
+              {/* </select> */}
             </div>
 
             {/* {formData.paymentMethod === "easypaisa" && ( <div className=" border border-green-400 bg-green-50 rounded-lg p-4 space-y-3"> <h3 className="font-semibold text-green-800 text-lg">Easypaisa Payment</h3> <p><strong>Number:</strong> 03154955421</p> <p><strong>Account Name:</strong> Muhammad Maaz</p> <label className="block text-sm font-medium text-gray-700 mt-2"> Upload Payment Screenshot </label> <input type="file" accept="image/*" onChange={handleFileChange} className="block w-full mt-2 text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-200 hover:file:bg-gray-300" /> 
@@ -243,11 +245,11 @@ const Checkout = () => {
               
               <div className="flex justify-between mt-4 font-bold text-lg">
                 <span>Shipping:</span>
-                <span>300 PKR</span>
+                <span>Free</span>
               </div>
               <div className="flex justify-between mt-4 font-bold text-lg">
                 <span>Total:</span>
-                <span>{totalAmount + 300} PKR</span>
+                <span>{totalAmount} PKR</span>
               </div>
             </>
           )}

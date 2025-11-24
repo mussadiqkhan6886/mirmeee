@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import DeleteReview from "./DeleteReview";
+import { Star } from "lucide-react";
 
 
 export default function TestimonialsList({
@@ -8,10 +9,12 @@ export default function TestimonialsList({
 }: {
   testimonials: reviewType[];
 }) {
+
   return (
     <div className="p-6">
       <div className="flex justify-between items-center px-10 mb-4">
-        <h1 className="text-2xl font-bold mb-6">Testimonials</h1>
+        <h1 className="text-2xl font-bold mb-6">Reviews</h1>
+        <Link href="/admin-dashboard/add-testimonial" className="p-2 px-3 bg-black text-white">Add Review</Link>
       </div>
       {testimonials.length < 1 ? <div className="text-center text-3xl">No Reviews</div> : <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonials.map((t) => (
@@ -21,9 +24,9 @@ export default function TestimonialsList({
           >
             <div className="flex items-center gap-4 mb-3">
               
-              <div>
+              <div className="flex items-center gap-3">
                 <h2 className="text-lg font-semibold capitalize">{t.name}</h2>
-                <p className="text-gray-500 text-sm">{t.designation}</p>
+                <p className="text-gray-500 text-sm">{t.rating} <Star color="yellow" /></p>
               </div>
             </div>
 

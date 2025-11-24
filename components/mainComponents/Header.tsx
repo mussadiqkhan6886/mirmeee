@@ -5,20 +5,30 @@ import React, { useEffect, useState } from 'react'
 import {Menu, Search, ShoppingBag, X} from "lucide-react";
 import { navigation } from '@/lib/constants';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 const Header = () => {
 
     const [sideBar, setSideBar] = useState(false)
     const [scrolled, setScrolled] = useState(false)
+    const pathname = usePathname()
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) setScrolled(true);
-      else setScrolled(false);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+useEffect(() => {
+  const handleScroll = () => {
+    if (window.scrollY > 50 || pathname !== "/") {
+      setScrolled(true);
+    } else {
+      setScrolled(false);
+    }
+  };
+
+  // run once on mount and also when pathname changes
+  handleScroll();
+
+  window.addEventListener("scroll", handleScroll);
+  return () => window.removeEventListener("scroll", handleScroll);
+}, [pathname]);
+
 
   return (
     <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-0" : " text-light lg:px-18 md:px-10 px-4 py-4"} fixed w-full max-w-[1440px]  border-b border-light z-50 duration-300`}>

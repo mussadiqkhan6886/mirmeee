@@ -3,7 +3,7 @@ import mongoose, { Schema } from "mongoose";
 const testimonialSchema = new Schema(
   {
     name: { type: String, required: true },
-    designation: { type: String }, 
+    rating: { type: String }, 
     message: { type: String, required: true },
   },
   { timestamps: true }

@@ -35,7 +35,7 @@ const Products = async ({params}: {params: Promise<{slug: string}>}) => {
     .map(word => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 
-  const res = await fetch(`${process.env.BASE_URL}/api/products`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
       next: { revalidate: 60 }, // caching optional
   });
 

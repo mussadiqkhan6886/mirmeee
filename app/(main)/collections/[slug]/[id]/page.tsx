@@ -14,7 +14,7 @@ const ProductPage = async ({params}: {params: Promise<{id: string}>}) => {
 
   await connectDB();
 
- const res = await fetch(`${process.env.BASE_URL}/api/products/${id}`, {
+ const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`, {
     next: { revalidate: 60 }, // caching optional
   });
 

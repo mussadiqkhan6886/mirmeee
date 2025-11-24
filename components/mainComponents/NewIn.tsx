@@ -3,7 +3,7 @@ import Products from "./Products";
 
 const NewIn = async () => {
     
-  const res = await fetch(`${process.env.BASE_URL}/api/products`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
     next: { revalidate: 60 }, // caching optional
   });
 

@@ -22,14 +22,14 @@ const Checkout = () => {
   const { cart, totalAmount, clearCart } = useCart();
   const [status, setStatus] = useState("");
   const [loading, setLoading] = useState(false);
-  const [paymentProof, setPaymentProof] = useState<File | null>(null); 
-  const [preview, setPreview] = useState<string | null>(null);
+  // const [paymentProof, setPaymentProof] = useState<File | null>(null); 
+  // const [preview, setPreview] = useState<string | null>(null);
 
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) { setPaymentProof(e.target.files[0]); setPreview(URL.createObjectURL(e.target.files[0])); } };
+  // const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => { if (e.target.files && e.target.files[0]) { setPaymentProof(e.target.files[0]); setPreview(URL.createObjectURL(e.target.files[0])); } };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -49,7 +49,7 @@ const Checkout = () => {
         name: item.name,
         price: item.price,
         onSale: item.onSale,
-        newPrice: item.newPrice,
+        discountPrice: item.discountPrice,
         quantity: item.quantity,
         images: item.images[0],
         selectedColor: item.selectedColor || "",
@@ -66,14 +66,14 @@ const Checkout = () => {
         postalCode: formData.postalCode || "No Postal Code",
         address: formData.address,
       },
-      paymentMethod: formData.paymentMethod,
+      // paymentMethod: formData.paymentMethod,
     };
 
 
     const formDataToSend = new FormData();
-    if(paymentProof){
-      formDataToSend.append("paymentProof", paymentProof);
-    }
+    // if(paymentProof){
+    //   formDataToSend.append("paymentProof", paymentProof);
+    // }
     formDataToSend.append("orderData", JSON.stringify(data));
 
     try {
@@ -98,7 +98,7 @@ const Checkout = () => {
 
   return (
     <>
-      <main className="flex flex-col md:flex-row justify-between">
+      <main className="flex flex-col min-h-screen md:flex-row justify-between">
         {/* LEFT: FORM */}
         <div className="w-full pt-5 border-r lg:pl-20 pl-5 pr-5 border-gray-300 md:w-2/3">
           <h1 className="text-3xl text-center font-bold mb-6 border-b border-gray-300 pb-2">
@@ -177,13 +177,13 @@ const Checkout = () => {
               <p>{formData.paymentMethod}</p>
               <select value={formData.paymentMethod} onChange={handleChange} name="paymentMethod">
                 <option value="cod">Cash on Delivery</option>
-                <option value="easypaisa">Easypaisa</option>
+                {/* <option value="easypaisa">Easypaisa</option> */}
                 {/* <option value="card">Bank Payment</option> */}
               </select>
             </div>
 
-            {formData.paymentMethod === "easypaisa" && ( <div className=" border border-green-400 bg-green-50 rounded-lg p-4 space-y-3"> <h3 className="font-semibold text-green-800 text-lg">Easypaisa Payment</h3> <p><strong>Number:</strong> 03154955421</p> <p><strong>Account Name:</strong> Muhammad Maaz</p> <label className="block text-sm font-medium text-gray-700 mt-2"> Upload Payment Screenshot </label> <input type="file" accept="image/*" onChange={handleFileChange} className="block w-full mt-2 text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-200 hover:file:bg-gray-300" /> 
-            {preview && ( <div className="mt-3"> <Image src={preview} alt="Payment proof" width={200} height={200} className="rounded-md border" /> </div> )} </div> )} 
+            {/* {formData.paymentMethod === "easypaisa" && ( <div className=" border border-green-400 bg-green-50 rounded-lg p-4 space-y-3"> <h3 className="font-semibold text-green-800 text-lg">Easypaisa Payment</h3> <p><strong>Number:</strong> 03154955421</p> <p><strong>Account Name:</strong> Muhammad Maaz</p> <label className="block text-sm font-medium text-gray-700 mt-2"> Upload Payment Screenshot </label> <input type="file" accept="image/*" onChange={handleFileChange} className="block w-full mt-2 text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-200 hover:file:bg-gray-300" /> 
+            {preview && ( <div className="mt-3"> <Image src={preview} alt="Payment proof" width={200} height={200} className="rounded-md border" /> </div> )} </div> )}  */}
 
             {/* {formData.paymentMethod === "card" && ( <div className=" border border-blue-400 bg-blue-50 rounded-lg p-4 space-y-3"> <h3 className="font-semibold text-blue-800 text-lg">Bank Transfer</h3> <p><strong>Bank:</strong> HBL</p> <p><strong>Account Title:</strong> IQRA NAA</p> <p><strong>Account No:</strong> 12877902882799</p>
             <p><strong>IBAN:</strong> PK84HABB0012877902882799</p><p><strong>BRANCH:</strong> DHUDHIAL</p> <label className="block text-sm font-medium text-gray-700 mt-2"> Upload Payment Proof </label> <input type="file" accept="image/*" onChange={handleFileChange} className="block w-full mt-2 text-sm text-gray-600 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:bg-gray-200 hover:file:bg-gray-300" /> {preview && ( <div className="mt-3"> <Image src={preview} alt="Payment proof" width={200} height={200} className="rounded-md border" /> </div> )} </div> )} */}
@@ -236,7 +236,7 @@ const Checkout = () => {
                       <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                     </div>
                   </div>
-                  <p className="font-medium">{item.onSale ? item?.newPrice! * item.quantity : item.price * item.quantity} PKR</p>
+                  <p className="font-medium">{item.onSale ? item?.discountPrice! * item.quantity : item.price * item.quantity} PKR</p>
                 </div>
               ))}
 

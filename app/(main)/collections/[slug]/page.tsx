@@ -30,11 +30,6 @@ const Products = async ({params}: {params: Promise<{slug: string}>}) => {
   );
 }
 
-  const updatedSlug = slug
-    .split("-")
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
       next: { revalidate: 60 }, // caching optional
   });
@@ -54,7 +49,7 @@ const Products = async ({params}: {params: Promise<{slug: string}>}) => {
   if (!productData || productData.length === 0) {
     return (
       <main className="max-w-7xl mx-auto my-16 px-4 xl:px-0 pt-24">
-        <HeaderProduct title={data.title} desc={data.desc} />
+        <HeaderProduct title={data.title} desc={data.description} />
         <p className="text-center text-gray-500 my-10">
           No products found in this collection.
         </p>

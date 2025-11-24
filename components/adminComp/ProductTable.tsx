@@ -9,7 +9,7 @@ import axios from 'axios';
 import Link from 'next/link';
 
 interface ProductTableProps {
-  products: Product[]; // categories with products
+  products: ProductType[]; // categories with products
 }
 
 export default function ProductTable({ products }: ProductTableProps) {
@@ -53,7 +53,7 @@ export default function ProductTable({ products }: ProductTableProps) {
       headerName: 'Discount Price',
       type: 'number',
       width: 130,
-      renderCell: (params) => params.row.newPrice || '-',
+      renderCell: (params) => params.row.discountPrice || '-',
     },
     {
       field: 'onSale',
@@ -70,7 +70,7 @@ export default function ProductTable({ products }: ProductTableProps) {
     {
       field: 'size',
       headerName: 'Size',
-      width: 80,
+      width: 180,
       type: 'string',
     },
     {

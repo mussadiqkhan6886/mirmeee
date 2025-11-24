@@ -24,7 +24,6 @@ export default function AdminProductsPage() {
 
   if (loading) return <div className="text-center py-10">Loading...</div>;
 
-  console.log(products)
 
   return (
     <div className="p-5">

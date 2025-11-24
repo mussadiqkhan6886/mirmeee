@@ -1,12 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { FiX } from 'react-icons/fi';
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 
 import "swiper/css";
 import "swiper/css/pagination";
+import { X } from 'lucide-react';
 
 
 const ImageProduct = ({images, name}: {images: string[], name: string}) => {
@@ -37,7 +37,7 @@ const ImageProduct = ({images, name}: {images: string[], name: string}) => {
 
           {show && (
         <div className="fixed inset-0 bg-black/60 z-50 flex">
-          <FiX
+          <X
             onClick={() => setShow(false)}
             className="text-3xl absolute right-10 top-10 text-white border border-white rounded-full p-1 cursor-pointer"
           />

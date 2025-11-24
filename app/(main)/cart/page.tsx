@@ -1,10 +1,10 @@
 'use client';
 
 import { useCart } from '@/hooks/useCart';
+import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FiTrash2 } from 'react-icons/fi';
 
 const Page = () => {
   const { cart, removeFromCart, updateQuantity, totalAmount } = useCart();
@@ -88,7 +88,7 @@ const Page = () => {
                     onClick={() => removeFromCart(item.id)}
                     className="flex items-center gap-1 text-red-500 hover:text-red-600 transition text-sm"
                   >
-                    <FiTrash2 /> Remove
+                    <Trash /> Remove
                   </button>
                 </div>
               </div>

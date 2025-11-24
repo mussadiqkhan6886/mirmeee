@@ -15,6 +15,7 @@ interface ProductType {
   onSale: boolean
   createdAt: string
   updatedAt: string
+  stock: number
 }
 
 

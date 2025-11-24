@@ -1,9 +1,9 @@
 'use client';
 
 import axios from 'axios';
+import { Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
-import { FaTrash } from 'react-icons/fa';
 
 const DeleteReview = ({id}: {id: string}) => {
 
@@ -22,7 +22,7 @@ const DeleteReview = ({id}: {id: string}) => {
   return (
     <>
     <button onClick={deleteTest} className="text-red-600 cursor-pointer hover:text-red-800">
-        <FaTrash />
+        <Trash />
     </button>
     <p>{result}</p>
     </>

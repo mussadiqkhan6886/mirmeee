@@ -2,10 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import ProductCard from './ProductCard';
-import { FiChevronsDown } from 'react-icons/fi';
+import { ChevronDown } from 'lucide-react';
 
 type SortWrapperProps = {
-  products: Product[];
+  products: ProductType[];
   slug: string
 };
 
@@ -48,7 +48,7 @@ const SortWrapper: React.FC<SortWrapperProps> = ({ products, slug }) => {
             <span className="text-gray-700 capitalize">
               {sortOption === 'default' ? 'Sort by' : sortOption.replace('-', ' ')}
             </span>
-            <FiChevronsDown
+            <ChevronDown
               className={`w-4 h-4 transition-transform ${
                 open ? 'rotate-180' : ''
               }`}

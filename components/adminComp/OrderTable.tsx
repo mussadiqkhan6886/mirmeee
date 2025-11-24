@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { FaTrash } from "react-icons/fa";
 import IconButton from "@mui/material/IconButton";
 import Box from "@mui/material/Box";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { Trash } from "lucide-react";
 
 interface Order {
   _id: string;
@@ -197,7 +197,7 @@ export default function OrderTable({ orders }: { orders: Order[] }) {
       renderCell: (params) => (
         <Box>
           <IconButton color="error" onClick={() => deleteOrder(params.row.id)}>
-            <FaTrash />
+            <Trash />
           </IconButton>
         </Box>
       ),

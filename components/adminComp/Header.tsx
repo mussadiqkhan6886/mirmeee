@@ -1,17 +1,17 @@
 'use client';
 
 import axios from 'axios';
+import { Home, MessageSquare, Package, PlusCircle, ShoppingBag } from 'lucide-react';
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation';
-import { FiHome, FiMessageSquare, FiPackage, FiPlusCircle, FiShoppingBag } from 'react-icons/fi'
 
 const Header = () => {
 
      const menuItems = [
-    { name: 'Testimonials', href: '/admin-dashboard/testimonials', icon: <FiMessageSquare className="w-4 h-4" /> },
-    { name: 'Products', href: '/admin-dashboard/products-list', icon: <FiPackage className="w-4 h-4" /> },
-    { name: 'Add Product', href: '/admin-dashboard/add-product', icon: <FiPlusCircle className="w-4 h-4" /> },
-    { name: 'Orders', href: '/admin-dashboard/orders-list', icon: <FiShoppingBag className="w-4 h-4" /> },
+    { name: 'Testimonials', href: '/admin-dashboard/testimonials', icon: <MessageSquare className="w-4 h-4" /> },
+    { name: 'Products', href: '/admin-dashboard/products-list', icon: <Package className="w-4 h-4" /> },
+    { name: 'Add Product', href: '/admin-dashboard/add-product', icon: <PlusCircle className="w-4 h-4" /> },
+    { name: 'Orders', href: '/admin-dashboard/orders-list', icon: <ShoppingBag className="w-4 h-4" /> },
   ]
   const pathname = usePathname()
   const router = useRouter()
@@ -34,7 +34,7 @@ const Header = () => {
           href="/"
           className="flex items-center gap-2 bg-main bg-black text-white px-4 py-2 rounded-lg "
         >
-          <FiHome className="w-4 h-4" />
+          <Home className="w-4 h-4" />
           Go Home
         </Link>
         <button className='underline cursor-pointer' onClick={logout}>Logout</button>

@@ -10,7 +10,7 @@ interface Props {
   images: string[];
   price: number;
   onSale: boolean;
-  newPrice: number | null;
+  discountPrice: number | null;
   name: string;
   quantity: number;
   colors?: string[];
@@ -23,7 +23,7 @@ const AddToCartButton = ({
   images,
   price,
   onSale,
-  newPrice,
+  discountPrice,
   name,
   quantity,
   colors,
@@ -47,7 +47,7 @@ const AddToCartButton = ({
       images,
       price,
       onSale,
-      newPrice,
+      discountPrice,
       name,
       quantity,
       selectedColor,

@@ -63,7 +63,7 @@ const products = JSON.parse(JSON.stringify(response))
 
           <hr className='opacity-10' />
           {/* Add to Cart */}
-         <AddToCartButton id={allProducts._id} images={allProducts.images} price={allProducts.price} onSale={allProducts.onSale} name={allProducts.name} newPrice={allProducts.discountPrice} quantity={1} colors={allProducts.colors} stock={allProducts.stock} size={allProducts.size}  />
+         <AddToCartButton id={allProducts._id} images={allProducts.images} price={allProducts.price} onSale={allProducts.onSale} name={allProducts.name} discountPrice={allProducts.discountPrice} quantity={1} colors={allProducts.colors} stock={allProducts.stock} size={allProducts.size}  />
          
         </div>
       </section>

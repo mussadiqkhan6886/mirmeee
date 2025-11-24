@@ -1,12 +1,12 @@
   import { NextRequest, NextResponse } from "next/server"
-import cloudinary from "@/lib/config/cloudinary"
-import { Product } from "@/lib/models/ProductSchema"
 import { connectDB } from "@/lib/config/database/db"
+import { Product } from "@/lib/models/ProductSchema"
+import cloudinary from "@/lib/config/cloudinary"
 
 export const GET = async (_req: NextRequest, {params}: {params: Promise<{id: string}>}) => {
     await connectDB()
     const {id} = await params
-    const product = await Product.findOne({slug: id})
+    const product = await Product.findOne({_id: id})
 
     if (!product) {
       return NextResponse.json({ success: false, message: "Product not found" }, { status: 404 });

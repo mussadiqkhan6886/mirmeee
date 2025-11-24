@@ -14,12 +14,16 @@ const ProductPage = async ({params}: {params: Promise<{id: string}>}) => {
 
   await connectDB();
 
- const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`, {
-    next: { revalidate: 60 }, // caching optional
-  });
+//  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/${id}`, {
+//     next: { revalidate: 60 }, // caching optional
+//   });
 
-  const jsn = await res.json();
-  const allProducts = jsn.product;
+//   const jsn = await res.json();
+//   const allProducts = jsn.product;
+
+const res = await Product.findOne({slug: id}).lean();
+
+const allProducts = JSON.parse(JSON.stringify(res));
 
 
  const response = await Product.aggregate([

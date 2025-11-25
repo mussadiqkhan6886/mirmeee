@@ -96,8 +96,8 @@ const ThankYouPage = async ({ params }: { params: Promise<{ id: string }> }) => 
           </div>
           <div className="flex justify-between pt-3 items-center">
             <p className="font-semibold">Shipping Cost</p>
-            <p className="font-semibold">Rs. 250</p>
-            </div>
+            <p className="font-semibold">{(data.totalPrice) >= 2000 ? "Free Shipping" : "250 PKR"}</p>
+          </div>
           <div className="mt-4 border-t pt-3 text-right">
             <p className="text-lg font-bold text-gray-800">
               Total: Rs.{data.totalPrice}

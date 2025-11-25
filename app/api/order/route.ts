@@ -30,31 +30,31 @@ export const POST = async (req: NextRequest) => {
 
     const formData = await req.formData();
     const orderData = JSON.parse(formData.get("orderData") as string);
-    // const paymentProofFile = formData.get("paymentProof") as File | null;
+    const paymentProofFile = formData.get("paymentProof") as File | null;
 
-    // const uploadedImages : string[] = []
+    const uploadedImages : string[] = []
 
-    // if (paymentProofFile && typeof paymentProofFile === "object") {
-    //   const arrayBuffer = await paymentProofFile.arrayBuffer();
-    //   const buffer = Buffer.from(arrayBuffer);
-    //  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    //       const uploadResult = await new Promise<any>((resolve, reject) => {
-    //         cloudinary.uploader
-    //           .upload_stream(
-    //             {
-    //               folder: "hairoil",
-    //               resource_type: "image",
-    //             },
-    //             (error, result) => {
-    //               if (error) reject(error);
-    //               else resolve(result);
-    //             }
-    //           )
-    //           .end(buffer);
-    //       });
+    if (paymentProofFile && typeof paymentProofFile === "object") {
+      const arrayBuffer = await paymentProofFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const uploadResult = await new Promise<any>((resolve, reject) => {
+            cloudinary.uploader
+              .upload_stream(
+                {
+                  folder: "hairoil",
+                  resource_type: "image",
+                },
+                (error, result) => {
+                  if (error) reject(error);
+                  else resolve(result);
+                }
+              )
+              .end(buffer);
+          });
     
-    //       uploadedImages.push(uploadResult.secure_url);
-    //     }
+          uploadedImages.push(uploadResult.secure_url);
+        }
 
 
     // 🔹 Create new order in MongoDB
@@ -64,8 +64,8 @@ export const POST = async (req: NextRequest) => {
       userDetails: orderData.userDetails,
       notes: orderData.notes,
       shippingAddress: orderData.shippingAddress,
-      // paymentMethod: orderData.paymentMethod,
-      // paymentProof: uploadedImages[0] || null,
+      paymentMethod: orderData.paymentMethod,
+      paymentProof: uploadedImages[0] || null,
       createdAt: new Date(),
     });
 

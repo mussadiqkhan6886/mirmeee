@@ -130,14 +130,14 @@ const Page = () => {
 
           <div className="flex justify-between mb-2 text-gray-600">
             <p>Shipping</p>
-            <p>250 PKR</p>
+            <p>{totalAmount >= 2000 ? "Free Shipping" : "250 PKR"}</p>
           </div>
 
           <hr className="my-4 border-gray-300" />
 
           <div className="flex justify-between text-lg font-semibold text-gray-800">
             <p>Total</p>
-            <p>Rs. {totalAmount + 250}</p>
+            <p>Rs. {totalAmount + (totalAmount >= 2000 ? 0 : 250) }</p>
           </div>
 
           <Link

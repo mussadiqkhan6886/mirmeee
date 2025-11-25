@@ -63,17 +63,17 @@ const OrderSchema = new Schema({
       postalCode: { type: String },
       address: {type: String, required: true}
     },
-    // paymentMethod: {
-    //   type: String,
-    //   enum: ["cod", "easypaisa"],
-    //   default: "cod"
-    // },
-    // paymentProof: {
-    //   type: String,
-    //   required: function(){
-    //     return this.paymentMethod !== "cod"
-    //   } 
-    // }
+    paymentMethod: {
+      type: String,
+      enum: ["cod", "bank"],
+      default: "cod"
+    },
+    paymentProof: {
+      type: String,
+      required: function(){
+        return this.paymentMethod !== "cod"
+      } 
+    }
   },
   { timestamps: true }
 )

@@ -1,22 +1,36 @@
+"use client";
+
 import OrderTable from "@/components/adminComp/OrderTable";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default async function OrdersPage() {
-  try {
-    // Call your API route
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/order`, {
-      next: {revalidate: 1}, // ensure fresh data every time
-    });
+export default function OrdersPage() {
+  const [orders, setOrders] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
 
-    if (!res.ok) {
-      throw new Error("Failed to fetch orders");
-    }
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/order`
+        );
+        setOrders(res.data.orders);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    const data = await res.json();
-    const orders = data.orders;
+    fetchOrders();
+  }, []);
 
-    return <OrderTable orders={orders} />;
-  } catch (error) {
-    console.error("Error fetching orders:", error);
-    return <div className="text-center py-10">Failed to load orders.</div>;
-  }
+  if (loading) return <div className="text-center py-10">Loading orders...</div>;
+
+  return (
+    <div className="p-5">
+      <h1 className="text-2xl text-center font-semibold mb-4">Orders</h1>
+      <OrderTable orders={orders} />
+    </div>
+  );
 }

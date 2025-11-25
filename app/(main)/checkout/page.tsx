@@ -55,7 +55,7 @@ const Checkout = () => {
         selectedColor: item.selectedColor || "",
         selectedSize: item.selectedSize,
       })),
-      totalPrice: totalAmount,
+      totalPrice: totalAmount + 250,
       userDetails: {
         fullName: formData.fullName,
         phone: formData.phone,
@@ -245,11 +245,11 @@ const Checkout = () => {
               
               <div className="flex justify-between mt-4 font-bold text-lg">
                 <span>Shipping:</span>
-                <span>Free</span>
+                <span>250 PKR</span>
               </div>
               <div className="flex justify-between mt-4 font-bold text-lg">
                 <span>Total:</span>
-                <span>{totalAmount} PKR</span>
+                <span>{totalAmount + 250} PKR</span>
               </div>
             </>
           )}

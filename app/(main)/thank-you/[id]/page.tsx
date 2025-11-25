@@ -96,7 +96,7 @@ const ThankYouPage = async ({ params }: { params: Promise<{ id: string }> }) => 
           </div>
           <div className="flex justify-between pt-3 items-center">
             <p className="font-semibold">Shipping Cost</p>
-            <p className="font-semibold">Rs. 0</p>
+            <p className="font-semibold">Rs. 250</p>
             </div>
           <div className="mt-4 border-t pt-3 text-right">
             <p className="text-lg font-bold text-gray-800">

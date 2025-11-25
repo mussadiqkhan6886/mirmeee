@@ -14,7 +14,7 @@ export default function TestimonialsList({
     <div className="p-6">
       <div className="flex justify-between items-center px-10 mb-4">
         <h1 className="text-2xl font-bold mb-6">Reviews</h1>
-        <Link href="/admin-dashboard/add-testimonial" className="p-2 px-3 bg-black text-white">Add Review</Link>
+        
       </div>
       {testimonials.length < 1 ? <div className="text-center text-3xl">No Reviews</div> : <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {testimonials.map((t) => (

@@ -7,6 +7,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import { italiano } from '@/lib/fonts';
 import { Star } from 'lucide-react';
+import Link from 'next/link';
 
 const Reviews = () => {
 
@@ -22,11 +23,11 @@ const Reviews = () => {
         fetchData()
     }, [])
 
-    console.log(data)
 
   return (
     <section className="my-20 max-w-[1240px] px-10 mx-auto">
         <h3 className={`font-bold text-3xl md:text-5xl mb-6 md:mb-10 text-center tracking-wide ${italiano.className }`}>Let Customers speak for us</h3>
+        <div className='mx-auto text-center pb-10'><Link href="/add-testimonial" className="p-2 px-3 bg-black text-white">Add Review</Link></div>
         <Swiper
             modules={[Navigation]}
             spaceBetween={15}

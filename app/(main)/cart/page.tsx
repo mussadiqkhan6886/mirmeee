@@ -130,14 +130,14 @@ const Page = () => {
 
           <div className="flex justify-between mb-2 text-gray-600">
             <p>Shipping</p>
-            <p>Free Shipping</p>
+            <p>250 PKR</p>
           </div>
 
           <hr className="my-4 border-gray-300" />
 
           <div className="flex justify-between text-lg font-semibold text-gray-800">
             <p>Total</p>
-            <p>Rs. {totalAmount}</p>
+            <p>Rs. {totalAmount + 250}</p>
           </div>
 
           <Link

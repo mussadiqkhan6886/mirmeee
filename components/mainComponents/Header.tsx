@@ -53,7 +53,7 @@ useEffect(() => {
       {sideBar && <nav className='flex z-50 lg:hidden items-center justify-center'>
         <ul className='flex flex-col gap-8 items-center py-6'>
         {navigation.map(item => (
-            <li key={item.title}><Link className='text-sm uppercase text-font' href={item.link}>{item.title}</Link></li>
+            <li onClick={() => setSideBar(false)} key={item.title}><Link className='text-sm uppercase text-font' href={item.link}>{item.title}</Link></li>
         ))}
         </ul>
       </nav>}

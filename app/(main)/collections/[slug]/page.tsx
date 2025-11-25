@@ -48,7 +48,7 @@ const Products = async ({params}: {params: Promise<{slug: string}>}) => {
 
   if (!productData || productData.length === 0) {
     return (
-      <main className="max-w-7xl mx-auto my-16 px-4 xl:px-0 pt-24">
+      <main className="max-w-7xl mx-auto my-16 px-4 xl:px-0 pt-18">
         <HeaderProduct title={data.title} desc={data.description} />
         <p className="text-center text-gray-500 my-10">
           No products found in this collection.
@@ -59,7 +59,7 @@ const Products = async ({params}: {params: Promise<{slug: string}>}) => {
 
 
   return (
-    <main className="max-w-7xl mx-auto my-16 px-4 xl:px-0 pt-24">
+    <main className="max-w-7xl mx-auto my-16 px-4 xl:px-0 pt-18">
       <HeaderProduct title={data.title} desc={data.description} />
       <p className="text-sm text-gray-500 mb-6 text-center md:text-left">
         Disclaimer: Colour may slightly differ from the actual picture due to lighting

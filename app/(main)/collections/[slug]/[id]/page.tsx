@@ -53,7 +53,7 @@ const products = JSON.parse(JSON.stringify(response))
         {/* LEFT: IMAGES */}
         <ImageProduct images={allProducts.images} name={allProducts.name} />
 
-        <div className="flex-1 pt-10 md:pt-0 flex flex-col gap-6">
+        <div className="flex-1 pt-5 md:pt-0 flex flex-col gap-6">
           <h1 className={`${italiano.className} text-2xl text-center md:text-left md:text-3xl tracking-widest capitalize`} >{allProducts.name}</h1>
           <div>
            <h2 className="text-gray-700">Rs. {allProducts.onSale ? <span><span className='line-through text-sm opacity-85'>{allProducts.price}</span> <span className='font-medium text-[19px]'>{allProducts.discountPrice}</span>  <span className='text-red-500 inline-block ml-4'>save RS {allProducts.price - allProducts.discountPrice}</span></span> : allProducts.price }</h2>

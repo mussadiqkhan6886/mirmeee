@@ -16,7 +16,7 @@ type Props = {
 
 const Products = ({data, heading}: Props) => {
   return (
-    <section className="my-20 max-w-[1240px] mx-auto">
+    <section className="my-20 max-w-[1240px] mx-auto px-1">
       <h3 className={`${italiano.className} text-3xl md:text-5xl mb-6 text-center`}>{heading}</h3>
        <Swiper
         modules={[Navigation]}
@@ -55,10 +55,10 @@ const Products = ({data, heading}: Props) => {
               {item.onSale && <div className='bg-medium text-light px-4 py-1 rounded-md absolute text-sm top-3 left-3'>Sale</div>}
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>
-                    <h4 className="text-lg text-font font-normal capitalize">{item.name}</h4>
+                    <h4 className="text-[14px] sm:text-base md:text-lg text-font font-normal capitalize">{item.name}</h4>
                 </div>
                 <div className='flex justify-between items-center mt-2'>
-                    <p className='text-sm font-semibold  text-black'>PKR {item.onSale ? <> <span className='line-through text-gray-700'>{item.price}</span> <span className='text-base'>{item.discountPrice}</span></> : <span>{item.price}</span>}</p>
+                    <p className='text-[13px] md:text-sm font-semibold  text-black'>PKR {item.onSale ? <> <span className='line-through text-gray-700'>{item.price}</span> <span className='text-base'>{item.discountPrice}</span></> : <span>{item.price}</span>}</p>
                 </div>
               </div>
             </div>

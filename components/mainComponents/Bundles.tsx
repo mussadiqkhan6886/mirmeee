@@ -3,7 +3,7 @@ import Products from "./Products";
 import { Product } from "@/lib/models/ProductSchema";
 import { connectDB } from "@/lib/config/database/db";
 
-export const revalidate = 60;
+export const fetchCache = 'no-store'; 
 
 const Bundles = async () => {
 
@@ -22,5 +22,6 @@ const Bundles = async () => {
     </section>
   );
 };
+
 
 export default Bundles;

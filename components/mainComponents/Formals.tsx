@@ -7,12 +7,11 @@ const Formals = async () => {
  
   await connectDB()
     
-  const res = await Product.find().lean();
+  const res = await Product.find(
+    { collection: { $regex: /^formals$/i } } // case-insensitive "formals"
+  ).lean();
 
-  const allProducts = JSON.parse(JSON.stringify(res));
-
-
-  const formatProducts = allProducts.filter((p: ProductType) => p.collection.toLowerCase() === "formals");
+  const formatProducts = JSON.parse(JSON.stringify(res));
 
   return (
     <section>

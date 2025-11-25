@@ -84,7 +84,7 @@ const ThankYouPage = async ({ params }: { params: Promise<{ id: string }> }) => 
                   <div>
                     <p className="font-semibold text-gray-800">{item.name} - {item.selectedColor || item.selectedSize}</p>
                     <p className="text-sm text-gray-600">
-                      {item.quantity} × Rs.{item.discountPrice}
+                      {item.quantity} × Rs.{item.onSale ? item.discountPrice : item.price}
                     </p>
                   </div>
                 </div>

@@ -34,7 +34,7 @@ const Products = ({data, heading}: Props) => {
         {data.map((item, i) => (
           <SwiperSlide key={i}>
             <div className='hover:scale-105 duration-300 relative'>
-              <Link href={`collections/${item.collectionSlug}/${item.slug}`}>
+              {item.inStock ? <Link href={`collections/${item.collectionSlug}/${item.slug}`}>
                 <Image
                   width={290}
                   height={350}
@@ -42,7 +42,16 @@ const Products = ({data, heading}: Props) => {
                   alt={item.name || 'Product'}
                   className="w-full md:h-[400px] object-cover cursor-pointer "
                 />
-              </Link>
+              </Link> : <div className='relative opacity-60 cursor-not-allowed'>
+                <Image
+                  width={290}
+                  height={350}
+                  src={item.images[0]}
+                  alt={item.name || 'Product'}
+                  className="w-full md:h-[400px] object-cover cursor-pointer "
+                />
+                <div className='bg-red-500 text-white px-2 py-1 absolute top-5 left-5'>NOT IN STOCK</div>
+              </div>}
               {item.onSale && <div className='bg-medium text-light px-4 py-1 rounded-md absolute text-sm top-3 left-3'>Sale</div>}
               <div className="p-4 text-center">
                 <div className='flex justify-between items-center'>

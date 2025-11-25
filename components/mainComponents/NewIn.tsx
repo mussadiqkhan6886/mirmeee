@@ -21,7 +21,7 @@ const NewIn = async () => {
   });
 
   return (
-    <section>
+    <section id="newArrivals">
       <Products data={newInProducts} heading="New In" />
     </section>
   );

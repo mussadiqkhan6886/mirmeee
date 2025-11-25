@@ -9,18 +9,15 @@ const NewIn = async () => {
     
    await connectDB()
       
-    const res = await Product.find().lean();
-  
-    const allProducts = JSON.parse(JSON.stringify(res));
-  
-
-  const sevenDaysAgo = new Date();
+     const sevenDaysAgo = new Date();
   sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
 
-  // Filter products created in last 7 days
-  const newInProducts = allProducts.filter((p: ProductType) => {
-    return new Date(p.createdAt) >= sevenDaysAgo;
-  });
+  const res = await Product.find({ createdAt: { $gte: sevenDaysAgo } })
+                           .sort({ createdAt: -1 })
+                           .limit(4)
+                           .lean();
+
+  const newInProducts = JSON.parse(JSON.stringify(res));
 
   return (
     <section id="newArrivals">

@@ -11,7 +11,7 @@ const Formals = async () => {
     
   const res = await Product.find(
     { collection: { $regex: /^formals$/i } } // case-insensitive "formals"
-  ).lean();
+  ).limit(6).lean();
 
   const formatProducts = JSON.parse(JSON.stringify(res));
 

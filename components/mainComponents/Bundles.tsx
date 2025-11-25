@@ -1,14 +1,15 @@
 import React from "react";
 import Products from "./Products";
+import { Product } from "@/lib/models/ProductSchema";
+import { connectDB } from "@/lib/config/database/db";
 
 const Bundles = async () => {
-    
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
-    next: { revalidate: 60 }, // caching optional
-  });
 
-  const json = await res.json();
-  const allProducts = json.data;
+  await connectDB()
+    
+  const res = await Product.find().lean();
+
+  const allProducts = JSON.parse(JSON.stringify(res));
 
   // Filter bundles only
   const bundleProducts = allProducts.filter((p: ProductType) => p.bundle === true);

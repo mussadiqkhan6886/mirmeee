@@ -3,6 +3,8 @@ import Products from "./Products";
 import { connectDB } from "@/lib/config/database/db";
 import { Product } from "@/lib/models/ProductSchema";
 
+export const revalidate = 60;
+
 const Formals = async () => {
  
   await connectDB()

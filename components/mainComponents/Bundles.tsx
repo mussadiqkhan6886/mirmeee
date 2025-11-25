@@ -3,6 +3,8 @@ import Products from "./Products";
 import { Product } from "@/lib/models/ProductSchema";
 import { connectDB } from "@/lib/config/database/db";
 
+export const revalidate = 60;
+
 const Bundles = async () => {
 
   await connectDB()

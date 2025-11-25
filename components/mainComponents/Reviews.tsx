@@ -14,7 +14,7 @@ const Reviews = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const res = await fetch("/api/testimonials")
+            const res = await fetch("/api/testimonials", {next: {revalidate: 60}})
             const json = await res.json()
             setData(json.testimonials)
         }

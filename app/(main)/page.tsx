@@ -7,6 +7,9 @@ import NewIn from '@/components/mainComponents/NewIn'
 import Reviews from '@/components/mainComponents/Reviews'
 import React from 'react'
 
+export const dynamic = 'force-dynamic';
+
+
 const Home = async () => {
 
   return (

@@ -26,7 +26,7 @@ export default function TestimonialsList({
               
               <div className="flex items-center gap-3">
                 <h2 className="text-lg font-semibold capitalize">{t.name}</h2>
-                <p className="text-gray-500 text-sm">{t.rating} <Star color="yellow" /></p>
+                <p className="text-gray-500 text-sm flex items-center gap-3">{t.rating} <Star color="yellow" /></p>
               </div>
             </div>
 

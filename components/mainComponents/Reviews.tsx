@@ -52,9 +52,9 @@ const Reviews = () => {
             {data.map((item, i) => (
                 <SwiperSlide key={i}>
                     <div className=' p-3 flex items-center flex-col justify-center'>
-                        <div className='flex gap-3'>
-                        <p className='font-semibold text-lg'>{item.name}</p>
-                        <p className='flex items-center gap-2'>{generateStars(Number(item.rating))}</p>
+                        <div className='flex flex-col gap-3'>
+                            <p className='font-semibold text-lg'>{item.name}</p>
+                            <p className='flex items-center gap-2'>{generateStars(Number(item.rating))}</p>
                         </div>
                         <div className='text-center mt-2'>
                             <p>{item.message}</p>

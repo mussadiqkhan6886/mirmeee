@@ -175,7 +175,6 @@ const Checkout = () => {
             </div>
             <div className="text-black text-center border py-2 md:col-span-2">
               <p>Payment Method</p>
-               <p>{formData.paymentMethod}</p>
               <select value={formData.paymentMethod} onChange={handleChange} name="paymentMethod">
                 <option value="cod">Cash on Delivery</option>
                 {/* <option value="easypaisa">Easypaisa</option>  */}

@@ -24,6 +24,14 @@ const Reviews = () => {
     }, [])
 
 
+    const generateStars = (rating: number) => {
+        return Array.from({ length: rating }, (_, i) => (
+            <Star key={i} className="w-4 h-4 text-yellow-500" />
+        ));
+        };
+
+
+
   return (
     <section className="my-20 max-w-[1240px] px-10 mx-auto">
         <h3 className={`font-bold text-3xl md:text-5xl mb-6 md:mb-10 text-center tracking-wide ${italiano.className }`}>Let Customers speak for us</h3>
@@ -46,7 +54,7 @@ const Reviews = () => {
                     <div className=' p-3 flex items-center flex-col justify-center'>
                         <div className='flex gap-3'>
                         <p className='font-semibold text-lg'>{item.name}</p>
-                        <p className='flex items-center gap-2'>{item.rating} <Star className='text-yellow-500' /></p>
+                        <p className='flex items-center gap-2'>{generateStars(Number(item.rating))}</p>
                         </div>
                         <div className='text-center mt-2'>
                             <p>{item.message}</p>

@@ -11,7 +11,7 @@ type Props = {
   onSale: boolean;
   oldSlug?: string;
   inStock: boolean;
-  variants: {color: string, size: string, stock: number}[]
+  variants: {color?: string, size?: string, stock: number}[]
 };
 
 const ProductCard = ({

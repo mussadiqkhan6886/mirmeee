@@ -1,9 +1,15 @@
 'use client';
 
 import { useCart } from '@/hooks/useCart';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Colors from './Colors';
 import Sizes from './Sizes';
+
+interface Variant {
+  color: string;
+  size: string;
+  stock: number;
+}
 
 interface Props {
   id: number;
@@ -13,9 +19,7 @@ interface Props {
   discountPrice: number | null;
   name: string;
   quantity: number;
-  colors?: string[];
-  stock: number
-  size?: string[]
+  variants: Variant[];
 }
 
 const AddToCartButton = ({
@@ -26,21 +30,41 @@ const AddToCartButton = ({
   discountPrice,
   name,
   quantity,
-  colors,
-  stock,
-  size
+  variants,
 }: Props) => {
-  const { addToCart, cart } = useCart();
-  const [selectedColor, setSelectedColor] = useState('');
-  const [selectedSize, setSelectedSize] = useState('')
+  const { addToCart } = useCart();
 
-  console.log(cart)
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedSize, setSelectedSize] = useState('');
+  const [stock, setStock] = useState(0);
+
+  const colors = variants
+    .filter((v) => v.color)
+    .map((v) => ({ color: v.color, colorStock: v.stock }));
+
+  const sizes = variants
+    .filter((v) => v.size)
+    .map((v) => ({ size: v.size, sizeStock: v.stock }));
+
+  // 🔹 Update stock whenever color or size changes
+  useEffect(() => {
+    let matchedVariant;
+
+    if (selectedColor && selectedSize) {
+      matchedVariant = variants.find(
+        (v) => v.color === selectedColor && v.size === selectedSize
+      );
+    } else if (selectedColor) {
+      matchedVariant = variants.find((v) => v.color === selectedColor);
+    } else if (selectedSize) {
+      matchedVariant = variants.find((v) => v.size === selectedSize);
+    }
+
+    setStock(matchedVariant?.stock || 0);
+  }, [selectedColor, selectedSize, variants]);
 
   const handleAddToCart = () => {
-    if (colors && colors.length > 0 && !selectedColor && size && size.length > 0 && !selectedSize) {
-      // Safety check: if colors exist, ensure one is selected
-      return;
-    }
+    if ((colors.length && !selectedColor) || (sizes.length && !selectedSize) || stock === 0) return;
 
     addToCart({
       id,
@@ -52,44 +76,30 @@ const AddToCartButton = ({
       quantity,
       selectedColor,
       selectedSize,
-      stock
+      stock,
     });
-    
-
   };
 
-  const hasColors = colors && colors.length > 0;
-  const hasSize = size && size.length > 0
   return (
     <div className="space-y-4">
-      {/* Color Selector */}
-      {hasColors && (
-        <Colors
-          colors={colors}
-          selectedColor={selectedColor}
-          setSelectedColor={setSelectedColor}
-        />
-      )}
-      {hasSize && (
-        <Sizes
-          size={size}
-          selectedSize={selectedSize}
-          setSelectedSize={setSelectedSize}
-        />
+      {colors.length > 0 && (
+        <Colors colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
       )}
 
-      {/* Add to Cart Button */}
+      {sizes.length > 0 && (
+        <Sizes sizes={sizes} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
+      )}
+
       <button
         onClick={handleAddToCart}
-        disabled={hasColors && !selectedColor || hasSize && !selectedSize}
-        className={`w-full px-6 py-3 rounded-md transition
-          ${
-            hasColors && !selectedColor || hasSize && !selectedSize
-              ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-              : 'bg-black text-white hover:bg-gray-800'
-          }`}
+        disabled={(colors.length && !selectedColor) || (sizes.length && !selectedSize) || stock === 0}
+        className={`w-full px-6 py-3 rounded-md transition ${
+          (colors.length && !selectedColor) || (sizes.length && !selectedSize) || stock === 0
+            ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+            : 'bg-black text-white hover:bg-gray-800'
+        }`}
       >
-        {hasColors && !selectedColor ? 'Select Color to Add' : hasSize && !selectedSize ? 'Select Size to Add' : 'Add to Cart'}
+        Add to Cart
       </button>
     </div>
   );

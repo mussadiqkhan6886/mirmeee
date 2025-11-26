@@ -28,15 +28,13 @@ export async function POST(req: NextRequest) {
     const price = Number(formData.get("price"));
     const discountPrice = Number(formData.get("discountPrice")) || null;
     const onSale = formData.get("onSale") === "true";
-    const stock = Number(formData.get("stock"));
-    const colors = formData.getAll("colors").map((c) => c.toString());
-    const size = formData.getAll("size").map((c) => c.toString());
     const files = formData.getAll("images");
     const inStock = formData.get("inStock") === "true";
     const bundle = formData.get("bundle") === "true";
-
+    const variantsRaw = formData.getAll("variants"); // array of strings
+    const variants = variantsRaw.map((v) => JSON.parse(v as string))
     
-    if (!collection || !name || !description || !price || !stock) {
+    if (!collection || !name || !description || !price) {
       throw new Error("Missing required fields");
     }
     
@@ -79,13 +77,11 @@ export async function POST(req: NextRequest) {
         name,
         description,
         price,
-        size,
-        stock,
         discountPrice,
         onSale,
-        colors,
         inStock,
         bundle,
+        variants,
         images: uploadedImages,
     });
     await newProduct.save();

@@ -3,25 +3,32 @@
 import React, { Dispatch, SetStateAction, useState } from 'react'
 
 type Props = {
-  size: string[]
-  selectedSize: string
-  setSelectedSize: Dispatch<SetStateAction<string>>
-}
+  sizes: { size: string; sizeStock: number }[];
+  selectedSize: string;
+  setSelectedSize: Dispatch<SetStateAction<string>>;
+};
 
-const Sizes = ({size, selectedSize, setSelectedSize}: Props) => {
+const Sizes = ({ sizes, selectedSize, setSelectedSize }: Props) => {
   return (
-    <div className='flex flex-wrap gap-4 mt-2 flex-col items-start'>
-        {!selectedSize && <p className='uppercase text-red-500'>Select Size</p>}
-        <p>Size: {' '} {selectedSize}</p>
-        <div className='grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-3 xl:grid-cols-5   gap-4'>
-        {size.map((s, i) => (
-            <div onClick={() => setSelectedSize(s)} key={i} className={`${selectedSize === s ? "bg-black text-white" : ""} px-4 py-1 border border-black/30 text-sm cursor-pointer text-center`}>
-            {s}
-            </div>
-        ))}
+    <div className="flex flex-col gap-2">
+      {!selectedSize && <p className="text-red-500">Select Size</p>}
+      {sizes.map((s, i) => (
+        <div
+          key={i}
+          onClick={() => {
+            setSelectedSize(s.size);
+          }}
+          className={`px-4 py-1 border cursor-pointer ${
+            selectedSize === s.size ? 'bg-black text-white' : ''
+          }`}
+        >
+          {s.size} ({s.sizeStock} in stock)
+        </div>
+      ))}
     </div>
-    </div>
-  )
-}
+  );
+};
+
+
 
 export default Sizes

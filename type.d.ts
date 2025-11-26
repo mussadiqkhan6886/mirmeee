@@ -7,15 +7,17 @@ interface ProductType {
   description: string
   images: string[]
   inStock: boolean
-  colors: string[]
-  size?: string[]
   collection: string
   collectionSlug: string
   bundle: boolean        // 👈 add this
   onSale: boolean
   createdAt: string
   updatedAt: string
-  stock: number
+  variants: {
+    color?: string
+    size?: string
+    stock: number
+  }[]
 }
 
 

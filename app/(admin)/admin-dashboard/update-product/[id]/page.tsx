@@ -5,6 +5,18 @@ import axios from "axios";
 import Image from "next/image";
 import imageCompression from "browser-image-compression";
 import { useRouter } from "next/navigation";
+import { Product } from "@/lib/models/ProductSchema";
+
+interface ColorSize {
+  name: string;
+  stock: number;
+}
+
+interface Variant {
+  color?: string;
+  size?: string;
+  stock: number;
+}
 
 const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
   const [files, setFiles] = useState<File[]>([]);
@@ -14,18 +26,19 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
   const [existingImages, setExistingImages] = useState<string[]>([]);
 
   const [data, setData] = useState({
+    collection: "",
+    slug: "",
     name: "",
     description: "",
     price: "",
     discountPrice: "",
     onSale: false,
-    colors: [] as string[],
-    images: [] as string[],
-    slug: "",
     inStock: true,
-    stock: "",
-    size: [] as string[],
-    bundle: false
+    images: [] as string[],
+    bundle: false,
+    colors: [] as ColorSize[],
+    sizes: [] as ColorSize[],
+    variants: [] as Variant[],
   });
 
   const router = useRouter();
@@ -37,20 +50,29 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
         const id = (await params).id;
         const res = await axios.get(`/api/products/${id}`);
         const product = res.data.product;
+
+       const colors: ColorSize[] = (product.variants || [])
+      .filter((v: Variant) => v.color)
+      .map((v: Variant) => ({ name: v.color!, stock: v.stock }));
+
+        const sizes: ColorSize[] = (product.variants || [])
+          .filter((v: Variant) => v.size)
+          .map((v: Variant) => ({ name: v.size!, stock: v.stock }));
         
         setData({
-          bundle: product.bundle || false,
+          collection: product.collection,
+           bundle: product.bundle || false,
           name: product.name || "",
           description: product.description || "",
           price: product.price || "",
           discountPrice: product.discountPrice || "",
           onSale: product.onSale || false,
-          colors: product.colors || [],
+          colors,
+          sizes,
           images: product.images || [],
           slug: product.slug || "",
           inStock: product.inStock || false,
-          stock: product.stock,
-          size: product.size
+          variants: product.variants || [],
         });
 
         setExistingImages(product.images || []);
@@ -83,27 +105,44 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
     setData({ ...data, [name]: type === "checkbox" ? checked : value });
   };
 
-  const handleColorChange = (index: number, value: string) => {
-    const updated = [...data.colors];
-    updated[index] = value;
-    setData({ ...data, colors: updated });
+  // Update a color or stock
+const handleColorChange = (index: number, field: "name" | "stock", value: string | number) => {
+  const updated = [...data.colors];
+  updated[index] = {
+    ...updated[index],
+    [field]: field === "stock" ? Number(value) : value
   };
+  setData({ ...data, colors: updated });
+};
 
-  const addColor = () => setData({ ...data, colors: [...data.colors, ""] });
-  const removeColor = (index: number) =>
-    setData({ ...data, colors: data.colors.filter((_, i) => i !== index) });
+// Add a new color
+const addColor = () =>
+  setData({ ...data, colors: [...data.colors, { name: "", stock: 0 }] });
 
-  const handleSizeChange = (index: number, value: string) => {
-    const updated = [...data.size];
-    updated[index] = value;
-    setData({ ...data, size: updated });
+// Remove a color
+const removeColor = (index: number) =>
+  setData({ ...data, colors: data.colors.filter((_, i) => i !== index) });
+
+// Update a size or stock
+const handleSizeChange = (index: number, field: "name" | "stock", value: string | number) => {
+  const updated = [...data.sizes];
+  updated[index] = {
+    ...updated[index],
+    [field]: field === "stock" ? Number(value) : value
   };
+  setData({ ...data, sizes: updated });
+};
 
-  const addSize = () => setData({ ...data, size: [...data.size, ""] });
-  const removeSize = (index: number) =>
-    setData({ ...data, size: data.size.filter((_, i) => i !== index) });
+// Add a new size
+const addSize = () =>
+  setData({ ...data, sizes: [...data.sizes, { name: "", stock: 0 }] });
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+// Remove a size
+const removeSize = (index: number) =>
+  setData({ ...data, sizes: data.sizes.filter((_, i) => i !== index) });
+
+
+const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
     const selectedFiles = Array.from(e.target.files);
     setFiles((prev) => [...prev, ...selectedFiles]);
@@ -131,9 +170,24 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
     try {
       const formData = new FormData();
 
-      Object.entries(data).forEach(([key, value]) => {
+       const variants: Variant[] = [];
+    if (data.collection !== "Formals") {
+      // Use colors only
+      data.colors.forEach((clr) => {
+        variants.push({ color: clr.name, stock: clr.stock });
+      });
+    } else {
+      // Use sizes only
+      data.sizes.forEach((sz) => {
+        variants.push({ size: sz.name, stock: sz.stock });
+      });
+    }
+
+    const submitData = { ...data, variants };
+
+    Object.entries(submitData).forEach(([key, value]) => {
         if (Array.isArray(value)) {
-          value.forEach((item) => formData.append(key, item));
+          value.forEach((item) => formData.append(key, JSON.stringify(item)));
         } else if (typeof value === "boolean") {
           formData.append(key, value.toString());
         } else if (value) {
@@ -216,17 +270,6 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
             required
           />
         </div>
-        <div>
-          <label className="block font-semibold mb-1">Stock</label>
-          <input
-            name="stock"
-            type="number"
-            value={data.stock}
-            onChange={handleChange}
-            className="w-full border rounded-lg p-2"
-            required
-          />
-        </div>
 
         {/* On Sale */}
         <div className="flex items-center gap-2">
@@ -273,16 +316,24 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
         )}
 
         {/* Colors */}
-        <div>
+        {data.collection !== "Formals" && <div>
           <label className="block font-semibold mb-2">Colors</label>
           {data.colors.map((clr, i) => (
             <div key={i} className="flex items-center gap-2 mb-2">
               <input
                 type="text"
-                value={clr}
-                onChange={(e) => handleColorChange(i, e.target.value)}
-                className="w-full border rounded-lg p-2"
+                value={clr.name}
+                onChange={(e) => handleColorChange(i, "name", e.target.value)}
                 placeholder={`Color ${i + 1}`}
+                className="border rounded-lg p-2 w-32"
+              />
+              <input
+                type="number"
+                value={clr.stock}
+                onChange={(e) => handleColorChange(i, "stock", e.target.value)}
+                placeholder="Stock"
+                className="border rounded-lg p-2 w-20"
+                min={0}
               />
               <button type="button" onClick={() => removeColor(i)} className="text-red-500">
                 ✕
@@ -292,17 +343,27 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
           <button type="button" onClick={addColor} className="text-sm text-blue-600">
             + Add Color
           </button>
-        </div>
-        <div>
-          <label className="block font-semibold mb-2">Size</label>
-          {data.size.map((s, i) => (
+        </div>}
+
+        {/* Sizes */}
+       {data.collection === "Formals" && (<div>
+          <label className="block font-semibold mb-2">Sizes</label>
+          {data.sizes.map((sz, i) => (
             <div key={i} className="flex items-center gap-2 mb-2">
               <input
                 type="text"
-                value={s}
-                onChange={(e) => handleSizeChange(i, e.target.value)}
-                className="w-full border rounded-lg p-2"
+                value={sz.name}
+                onChange={(e) => handleSizeChange(i, "name", e.target.value)}
                 placeholder={`Size ${i + 1}`}
+                className="border rounded-lg p-2 w-32"
+              />
+              <input
+                type="number"
+                value={sz.stock}
+                onChange={(e) => handleSizeChange(i, "stock", e.target.value)}
+                placeholder="Stock"
+                className="border rounded-lg p-2 w-20"
+                min={0}
               />
               <button type="button" onClick={() => removeSize(i)} className="text-red-500">
                 ✕
@@ -312,7 +373,8 @@ const UpdateProduct = ({ params }: { params: Promise<{ id: string }> }) => {
           <button type="button" onClick={addSize} className="text-sm text-blue-600">
             + Add Size
           </button>
-        </div>
+        </div>)}
+
 
         {/* Existing Images */}
         {existingImages.length > 0 && (

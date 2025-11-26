@@ -10,11 +10,15 @@ const productSubSchema = new mongoose.Schema({
   onSale: { type: Boolean, default: false },
   inStock: {type: Boolean, default: true, required: true},
   images: { type: [String], required: true },
-  colors: { type: [String], default: [] },
-  size: { type: [String], default: []},
+  variants: [
+    {
+      color: { type: String, default: null }, // optional
+      size: { type: String, default: null },  // optional
+      stock: { type: Number, default: 0 },
+    }
+  ],
   slug: {type: String, required: true}, 
   bundle: {type: Boolean, default: false},
-  stock: {type: Number, required: true}
 },
 { timestamps: true }
 );

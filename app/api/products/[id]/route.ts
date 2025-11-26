@@ -41,13 +41,13 @@ export const PATCH = async (
     const description = formData.get("description") as string;
     const price = Number(formData.get("price"));
     const discountPrice = formData.get("discountPrice") ? Number(formData.get("discountPrice")) : null;
-    const stock = Number(formData.get("stock"))
     const onSale = formData.get("onSale") === "true";
-    const colors = formData.getAll("colors").map(c => c.toString());
-    const size = formData.getAll("size").map(c => c.toString());
     const slug = formData.get("slug") as string
     const inStock = formData.get("inStock") === "true";
     const bundle = formData.get("bundle") === "true";
+     const variantsRaw = formData.getAll("variants"); // array of strings
+    const variants = variantsRaw.map((v) => JSON.parse(v as string))
+    console.log(variants)
     const files = formData.getAll("images") as File[];
     const uploadedImages: string[] = [];
 
@@ -81,12 +81,10 @@ export const PATCH = async (
       slug,
       description,
       price,
-      stock,
       bundle,
       discountPrice,
       onSale,
-      colors,
-      size,
+      variants,
       inStock,
       images: updatedImages, // just overwrite with merged array
     };

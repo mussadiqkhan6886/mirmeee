@@ -67,18 +67,31 @@ export default function ProductTable({ products }: ProductTableProps) {
       width: 80,
       type: 'boolean',
     },
-    {
-      field: 'size',
-      headerName: 'Size',
-      width: 180,
-      type: 'string',
-    },
-    {
-      field: 'colors',
-      headerName: 'Colors',
-      width: 320,
-      renderCell: (params) => params.row.colors.join(", "),
-    },
+   {
+  field: 'size',
+  headerName: 'Size',
+  width: 130,
+  renderCell: (params) => {
+    // filter out null/empty sizes and join with comma
+    return (params.row.variants || [])
+      .map((item: { size: string }) => item.size)
+      .filter((size: string) => size && size !== "null")
+      .join(", ");
+  },
+},
+{
+  field: 'colors',
+  headerName: 'Colors',
+  width: 320,
+  renderCell: (params) => {
+    // filter out null/empty colors and join with comma
+    return (params.row.variants || [])
+      .map((item: { color: string }) => item.color)
+      .filter((color: string) => color && color !== "null")
+      .join(", ");
+  },
+},
+
     {
       field: 'collection',
       headerName: 'Category',

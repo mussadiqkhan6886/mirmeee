@@ -11,7 +11,7 @@ type Props = {
   onSale: boolean;
   oldSlug?: string;
   inStock: boolean;
-  stock: number
+  variants: {color: string, size: string, stock: number}[]
 };
 
 const ProductCard = ({
@@ -24,7 +24,7 @@ const ProductCard = ({
   onSale,
   oldSlug,
   inStock,
-  stock,
+  variants,
 }: Props) => {
 
   const content = (
@@ -61,7 +61,7 @@ const ProductCard = ({
             'Rs.' + price
           )}
         </h4>
-        <h4 className='flex items-center justify-center gap-1 my-1 text-sm'> {inStock ? <span className="w-2 h-2 inline-block bg-green-500 rounded-full"></span> : <span className="w-2 h-2 inline-block bg-red-500 rounded-full"></span>} Stock : {stock} Available</h4>
+        <h4 className='flex items-center justify-center gap-1 my-1 text-sm'> {inStock ? <span className="w-2 h-2 inline-block bg-green-500 rounded-full"></span> : <span className="w-2 h-2 inline-block bg-red-500 rounded-full"></span>} Stock : {variants.reduce((product, v) => product * v.stock, 1)} Available</h4>
       </div>
     </>
   );

@@ -67,29 +67,46 @@ const Page = () => {
                   <div className="flex items-center gap-4 border border-gray-300 rounded-md px-3 py-1">
                     <button
                       className="text-xl font-semibold hover:text-gray-700"
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      onClick={() =>
+                        updateQuantity(
+                          item.id,
+                          item.selectedColor!,
+                          item.quantity - 1,
+                          item.selectedSize!
+                        )
+                      }
                     >
                       −
                     </button>
+
                     <p className="font-medium">{item.quantity}</p>
                     <button
-                      className="text-xl font-semibold hover:text-gray-700"
-                      onClick={() => {
-                        if(item.quantity < item.stock){
-                          updateQuantity(item.id, item.quantity + 1)
-                        }
-                      }}
-                    >
-                      +
-                    </button>
+                        className="text-xl font-semibold hover:text-gray-700"
+                        onClick={() => {
+                          if (item.quantity < item.stock) {
+                            updateQuantity(
+                              item.id,
+                              item.selectedColor!,
+                              item.quantity + 1,
+                              item.selectedSize!
+                            );
+                          }
+                        }}
+                      >
+                        +
+                      </button>
+
                   </div>
 
                   <button
-                    onClick={() => removeFromCart(item.id)}
+                    onClick={() =>
+                      removeFromCart(item.id, item.selectedColor!, item.selectedSize!)
+                    }
                     className="flex items-center gap-1 text-red-500 hover:text-red-600 transition text-sm"
                   >
                     <Trash /> Remove
                   </button>
+
                 </div>
               </div>
 

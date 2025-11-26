@@ -21,9 +21,9 @@ export interface CartContextType {
   totalAmount: number;
   totalItems: number;
   addToCart: (item: CartItem) => void;
-  removeFromCart: (id: number) => void;
+  removeFromCart: (id: number, color: string, size: string) => void;
   clearCart: () => void;
-  updateQuantity: (id: number, quantity: number) => void;
+  updateQuantity: (id: number, color: string, quantity: number, size: string) => void;
 }
 
 export const CartContext = createContext<CartContextType | null>(null);
@@ -74,13 +74,45 @@ export const CartContextProvider = ({ children }: { children: ReactNode }) => {
   });
 };
 
+const isSameItem = (
+  item: CartItem,
+  id: number,
+  color?: string,
+  size?: string
+) => {
+  if (item.id !== id) return false;
 
-  // ❌ Remove item
-  const removeFromCart = (id: number) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
+  if (color && item.selectedColor !== color) return false;
+  if (size && item.selectedSize !== size) return false;
 
-  const updateQuantity = (id: number, quantity: number) => { setCart((prev) => prev.map((item) => item.id === id ? { ...item, quantity: Math.max(1, quantity) } : item ) ); };
+  return true;
+};
+
+
+ const removeFromCart = (id: number, color?: string, size?: string) => {
+  setCart((prev) => prev.filter((item) => !isSameItem(item, id, color, size)));
+};
+
+
+
+ const updateQuantity = (
+  id: number,
+  color: string | undefined,
+  quantity: number,
+  size: string | undefined
+) => {
+  setCart((prev) =>
+    prev.map((item) =>
+      isSameItem(item, id, color, size)
+        ? {
+            ...item,
+            quantity: Math.max(1, Math.min(quantity, item.stock)), // no exceed stock
+          }
+        : item
+    )
+  );
+};
+
 
   const clearCart = () => setCart([]);
 

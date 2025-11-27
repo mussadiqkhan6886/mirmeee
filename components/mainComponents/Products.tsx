@@ -18,7 +18,10 @@ const Products = ({data, heading}: Props) => {
   return (
     <section className="my-20 max-w-[1240px] mx-auto px-1">
       <h3 className={`${italiano.className} text-3xl md:text-5xl mb-6 text-center`}>{heading}</h3>
-       <Swiper
+       {data.length < 1 ? <div>
+        <p className='text-center text-2xl  md:text-3xl text-gray-600'>No Products Found</p>
+       </div> : (
+        <Swiper
         modules={[Navigation]}
         spaceBetween={15}
         slidesPerView={4}
@@ -65,6 +68,7 @@ const Products = ({data, heading}: Props) => {
           </SwiperSlide>
         ))}
       </Swiper>
+       )}
     </section>
   )
 }

@@ -32,15 +32,15 @@ useEffect(() => {
 
 
   return (
-    <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-0" : " text-light lg:px-18 md:px-10 px-4 py-4"} fixed top-0 w-full max-w-[1440px]  border-b border-light z-50 duration-300`}>
+    <header className={`${scrolled || sideBar ? "bg-light text-font lg:px-16 md:px-7 px-2 py-2" : " text-light lg:px-18 md:px-10 px-4 py-6"} fixed top-0 w-full max-w-[1440px]  border-b border-light z-50 duration-300`}>
       <div className='flex justify-between items-center'>
         <div className='block lg:hidden'>
           {!sideBar && <Menu onClick={() => setSideBar(true)} className='inline-block lg:hidden' />}
             {sideBar && <X onClick={() => setSideBar(false)} className='inline-block lg:hidden' />}
         </div>
         <div>
-            {!scrolled && <Image className="scale-125" src={"/logo(2).png"} alt='logo of shop' width={70} height={70} />}
-            {scrolled && <Image className="scale-125" src={"/logo(1).png"} alt='logo of shop' width={70} height={70} />}
+            {!scrolled && <Image className="scale-125" src={"/logo(2).png"} alt='logo of shop' width={100} height={100} />}
+            {scrolled && <Image className="scale-125" src={"/logo(1).png"} alt='logo of shop' width={100} height={100} />}
         </div>
         <nav className='lg:flex hidden items-center justify-center'>
           <ul className='flex lg:gap-x-5 xl:gap-x-8 items-center'>

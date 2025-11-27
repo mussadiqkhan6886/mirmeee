@@ -15,6 +15,8 @@ export const POST = async (req: NextRequest) => {
       return NextResponse.json({ message: "User does not exist" }, { status: 400 })
     }
 
+
+
     const validPassword = await bcryptjs.compare(password, findUser.password)
     if (!validPassword) {
       return NextResponse.json({ message: "Invalid password" }, { status: 400 })
@@ -27,11 +29,10 @@ export const POST = async (req: NextRequest) => {
     }
 
     const token = jwt.sign(tokenData, process.env.TOKEN_SECRET!, { expiresIn: "1d" })
-
     const response = NextResponse.json({ message: "Login Successfully", success: true })
-
+    
     response.cookies.set("adminToken", token, {
-      httpOnly: true,
+        httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "lax",
       path: "/", // cookie available everywhere

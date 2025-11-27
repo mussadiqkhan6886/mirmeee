@@ -33,9 +33,9 @@ const AdminLogin = () => {
       <section className="lg:w-[30%] md:w-[45%] sm:w-[60%] w-[80%]">
         <h1 className="detailsHeading text-center">Admin Login</h1>
         <form onSubmit={handleSubmit} className='space-y-2'>
-          <label className="block text-gray-700 font-medium mb-1">Email</label>
+          <label className="block text-gray-700 font-medium mb-1">Username</label>
           <input
-            type="email"
+            type="text"
             className="w-full border border-gray-300 rounded-md px-3 py-2"
             value={email}
             onChange={(e) => setEmail(e.target.value)}

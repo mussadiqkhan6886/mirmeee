@@ -39,8 +39,8 @@ useEffect(() => {
             {sideBar && <X onClick={() => setSideBar(false)} className='inline-block lg:hidden' />}
         </div>
         <div>
-            {!sideBar && <Image src={"/logo(2).png"} alt='logo of shop' width={70} height={70} />}
-            {sideBar && <Image src={"/logo(1).png"} alt='logo of shop' width={70} height={70} />}
+            {!scrolled && <Image src={"/logo(2).png"} alt='logo of shop' width={70} height={70} />}
+            {scrolled && <Image src={"/logo(1).png"} alt='logo of shop' width={70} height={70} />}
         </div>
         <nav className='lg:flex hidden items-center justify-center'>
           <ul className='flex lg:gap-x-5 xl:gap-x-8 items-center'>

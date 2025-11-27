@@ -2,17 +2,48 @@ import HeaderProduct from '@/components/mainComponents/HeaderProduct';
 import { collectionsData } from '@/lib/constants';
 import React from 'react';
 import SortWrapper from '@/components/mainComponents/Sorting';
+import { Metadata } from 'next';
+import { connectDB } from '@/lib/config/database/db';
 
-// export async function generateMetadata(
-//   { params }: { params: Promise<{ slug: string }> }
-// ): Promise<Metadata> {
-//   const { slug } = await params;
-//   const formattedTitle = slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+export async function generateMetadata(
+  { params }: { params: Promise<{ slug: string }> }
+): Promise<Metadata> {
+  const { slug } = await params;
 
-//   return {
-//     title: formattedTitle + " M&Z Store", // optional: format the slug
-//   };
-// }
+  const formattedTitle = slug
+    .replace(/-/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+
+  return {
+    title: `${formattedTitle} – MIRMEE`,
+    description: `Explore premium handmade ${formattedTitle} by MIRMEE. Discover hair bows, scrunchies, headbands, and more.`,
+    openGraph: {
+      title: `${formattedTitle} – MIRMEE`,
+      description: `Explore premium handmade ${formattedTitle} by MIRMEE. Shop hair bows, scrunchies, headbands and more.`,
+      type: "website",
+      url: `https://www.shopmirmee.com/collections/${slug}`,
+      images: [
+        {
+          url: "/logo.jpg", // replace later
+          width: 1200,
+          height: 630,
+          alt: `${formattedTitle} – MIRMEE`,
+        },
+      ],
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
+
+export async function generateStaticParams() {
+  return collectionsData.map(item => ({
+    slug: item.link,
+  }));
+}
 
 const Products = async ({params}: {params: Promise<{slug: string}>}) => {
 

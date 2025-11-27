@@ -8,6 +8,16 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { italiano } from '@/lib/fonts';
 
+export const generateStaticParams = async () => {
+  await connectDB();
+
+  const res = await Product.find().select("slug");
+
+  return res.map(item => ({
+    id: item.slug
+  }));
+};
+
 const ProductPage = async ({params}: {params: Promise<{id: string}>}) => {
 
   const {id} = await params;
@@ -15,6 +25,11 @@ const ProductPage = async ({params}: {params: Promise<{id: string}>}) => {
   await connectDB();
 
 const res = await Product.findOne({slug: id}).lean();
+
+
+  if (!res) {
+    return <div className="text-center py-20">Product not found</div>;
+  }
 
 const allProducts = JSON.parse(JSON.stringify(res));
 
@@ -67,31 +82,103 @@ const products = JSON.parse(JSON.stringify(response))
            <div className='pt-16'>
             <HeaderProduct title='May you like' desc="May You like these awesome related products" />
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-8">
-            {products.length ? products.slice(0,3).map((product: ProductType) => (
-              <div  
-              key={product._id}
-                    className="relative group cursor-pointer overflow-hidden  transition-all duration-300"
-                  >
-                    <Link href={`/collections/${updatedSlug}/${product.slug}`}>
-                    <div className="overflow-hidden h-[200px] md:h-[350px]">
-                      <Image
-                        src={product.images[0]}
-                        alt={product.name}
-                        width={400}
-                        height={420}
-                        className="w-full h-full object-cover transition-all duration-500 ease-in-out scale-100 group-hover:scale-105"
-                      />
-                    </div>
-              
-                    {/* Info */}
-                    <div className="text-center mt-3">
-                      <h3 className="tracking-widest md:uppercase text-[12px] md:text-sm mb-1">{product.name}</h3>
-                      <h4 className="text-gray-700">{product.onSale ? <span><span className='line-through text-sm opacity-85'>Rs. {product.price}</span> <span className='font-medium text-[17px]'>Rs. {product.discountPrice}</span>  <span className='text-red-500 inline-block ml-4'>Save Rs. {product.price - product.discountPrice!}</span></span> : "Rs." + product.price }</h4>
-                    </div>
-                    </Link>
-                  </div>
-            )) : <div className='text-center text-gray-400'>No Products Found Related</div>}
+  {products.length ? products.slice(0, 3).map((product: ProductType) => {
+    
+    const isOut = !product.inStock;   // or product.stock === 0
+
+    return (
+      <div
+        key={product._id}
+        className={`
+          relative group overflow-hidden transition-all duration-300
+          ${isOut ? "cursor-not-allowed opacity-60" : "cursor-pointer"}
+        `}
+      >
+        {/* Disable link when out of stock */}
+        {isOut ? (
+          /* OUT OF STOCK — NO LINK */
+          <div>
+            <div className="overflow-hidden h-[200px] md:h-[350px]">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                width={400}
+                height={420}
+                className="w-full h-full object-cover transition-all duration-500 ease-in-out scale-100"
+              />
             </div>
+
+            <div className="text-center mt-3">
+              <h3 className="tracking-widest md:uppercase text-[12px] md:text-sm mb-1">
+                {product.name}
+              </h3>
+              <h4 className="text-gray-700">
+                {product.onSale ? (
+                  <span>
+                    <span className="line-through text-sm opacity-85">
+                      Rs. {product.price}
+                    </span>{" "}
+                    <span className="font-medium text-[17px]">
+                      Rs. {product.discountPrice}
+                    </span>{" "}
+                    <span className="text-red-500 inline-block ml-4">
+                      Save Rs. {product.price - product.discountPrice!}
+                    </span>
+                  </span>
+                ) : (
+                  "Rs." + product.price
+                )}
+              </h4>
+
+              {/* OUT OF STOCK LABEL */}
+              <p className="text-red-600 font-semibold text-sm mt-1">
+                Out of Stock
+              </p>
+            </div>
+          </div>
+        ) : (
+          /* IN STOCK — NORMAL LINK */
+          <Link href={`/collections/${updatedSlug}/${product.slug}`}>
+            <div className="overflow-hidden h-[200px] md:h-[350px]">
+              <Image
+                src={product.images[0]}
+                alt={product.name}
+                width={400}
+                height={420}
+                className="w-full h-full object-cover transition-all duration-500 ease-in-out scale-100 group-hover:scale-105"
+              />
+            </div>
+
+            <div className="text-center mt-3">
+              <h3 className="tracking-widest md:uppercase text-[12px] md:text-sm mb-1">
+                {product.name}
+              </h3>
+              <h4 className="text-gray-700">
+                {product.onSale ? (
+                  <span>
+                    <span className="line-through text-sm opacity-85">
+                      Rs. {product.price}
+                    </span>{" "}
+                    <span className="font-medium text-[17px]">
+                      Rs. {product.discountPrice}
+                    </span>{" "}
+                    <span className="text-red-500 inline-block ml-4">
+                      Save Rs. {product.price - product.discountPrice!}
+                    </span>
+                  </span>
+                ) : (
+                  "Rs." + product.price
+                )}
+              </h4>
+            </div>
+          </Link>
+        )}
+      </div>
+    );
+  }) : (
+    <div className="text-center text-gray-400">No Products Found Related</div>
+  )}
+</div>
           </div>
     </main>
   );

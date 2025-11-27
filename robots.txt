@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://www.shopmirmee.com/sitemap.xml
+
+# Block any private/admin pages (optional)
+Disallow: /admin-dashboard

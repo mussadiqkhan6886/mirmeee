@@ -66,7 +66,6 @@ const products = JSON.parse(JSON.stringify(response))
           <div>
            <h2 className="text-gray-700">Rs. {allProducts.onSale ? <span><span className='line-through text-sm opacity-85'>{allProducts.price}</span> <span className='font-medium text-[19px]'>{allProducts.discountPrice}</span>  <span className='text-red-500 inline-block ml-4'>save RS {allProducts.price - allProducts.discountPrice}</span></span> : allProducts.price }</h2>
             <p className="text-sm text-gray-500">Shipping Calculated at checkout</p>
-             <h4 className='flex mt-3 items-center text-gray-700 gap-2 my-1 text-sm'> {allProducts.inStock ? <span className="w-2 h-2 inline-block bg-green-500 rounded-full"></span> : <span className="w-2 h-2 inline-block bg-red-500 rounded-full"></span>} Stock : {allProducts.variants.reduce((product: number, v: {stock: number}) => product + v.stock, 0)} Available</h4>
              <div className='text-zinc-500 mt-3'>
               <h4>Description: </h4>
               <p>{allProducts.description}</p>

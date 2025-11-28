@@ -10,7 +10,7 @@ type Props = {
 
 const Sizes = ({ sizes, selectedSize, setSelectedSize }: Props) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="grid grid-cols-2 gap-3">
       {!selectedSize && <p className="text-red-500">Select Size</p>}
       {sizes.map((s, i) => (
         <div
@@ -22,7 +22,7 @@ const Sizes = ({ sizes, selectedSize, setSelectedSize }: Props) => {
             selectedSize === s.size ? 'bg-black text-white' : ''
           }`}
         >
-          {s.size} ({s.sizeStock} in stock)
+          {s.size}
         </div>
       ))}
     </div>

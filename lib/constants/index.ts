@@ -6,6 +6,7 @@ export const navigation = [
     {title: "Scrunchies", link: "/collections/scrunchies"},
     {title: "Headbands", link: "/collections/head-bands"},
     {title: "Formals", link: "/collections/formals"},
+    {title: "Nails", link: "/collections/nails"},
     {title: "All Accessories", link: "/collections/all"},
 ]
 
@@ -51,6 +52,13 @@ export const collectionsData = [
     image: "/formals.jpg",
     description:
       "Elegant accessories for special occasions. Designed to complement formal outfits."
+  },
+  {
+    title: "Nails",
+    link: "nails",
+    image: "/nails.jpg",
+    description:
+      "Unique and perfect stylish designer nails. Perfect with your new outfit"
   },
   {
     title: "All Accessories",
@@ -102,6 +110,13 @@ export const collections = [
     image: "/formals.jpg",
     description:
       "Elegant accessories for special occasions. Designed to complement formal outfits."
+  },
+  {
+    title: "Nails",
+    link: "/collections/nails",
+    image: "/nails.jpg",
+    description:
+      "Unique and perfect stylish designer nails. Perfect with your new outfit"
   },
   {
     title: "All Accessories",

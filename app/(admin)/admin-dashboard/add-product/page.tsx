@@ -203,7 +203,7 @@ const AddProduct = () => {
             required
           >
             <option value="">Select Collection</option>
-            {collections.slice(0, 6).map((col) => (
+            {collections.slice(0, 7).map((col) => (
               <option key={col.link} value={col.title}>
                 {col.title}
               </option>

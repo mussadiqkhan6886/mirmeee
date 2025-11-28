@@ -45,7 +45,7 @@ useEffect(() => {
         <nav className='lg:flex hidden items-center justify-center'>
           <ul className='flex lg:gap-x-5 xl:gap-x-8 items-center'>
           {navigation.map(item => (
-              <li key={item.title}><Link className='text-sm uppercase  whitespace-nowrap hover:underline duration-200' href={item.link}>{item.title}</Link></li>
+              <li key={item.title}><Link className='text-[13px] xl:text-sm uppercase  whitespace-nowrap hover:underline duration-200' href={item.link}>{item.title}</Link></li>
           ))}
           </ul>
         </nav>

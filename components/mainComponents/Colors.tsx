@@ -10,8 +10,9 @@ type Props = {
 
 const Colors = ({ colors, selectedColor, setSelectedColor }: Props) => {
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="flex flex-col gap-3">
       {!selectedColor && <p className="text-red-500">Select Color</p>}
+      <div className='grid grid-cols-2 gap-3'>
       {colors.map((c, i) => (
         <div
           key={i}
@@ -25,6 +26,7 @@ const Colors = ({ colors, selectedColor, setSelectedColor }: Props) => {
           {c.color}
         </div>
       ))}
+      </div>
     </div>
   );
 };

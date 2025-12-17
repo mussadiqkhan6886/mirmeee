@@ -345,7 +345,7 @@ const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
           </button>
         </div>}
 
-        {/* Sizes */}
+        {/* Sizes
        {data.collection === "Formals" && (<div>
           <label className="block font-semibold mb-2">Sizes</label>
           {data.sizes.map((sz, i) => (
@@ -369,11 +369,11 @@ const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
                 ✕
               </button>
             </div>
-          ))}
-          <button type="button" onClick={addSize} className="text-sm text-blue-600">
+          ))} */}
+          {/* <button type="button" onClick={addSize} className="text-sm text-blue-600">
             + Add Size
           </button>
-        </div>)}
+        </div>)} */}
 
 
         {/* Existing Images */}

@@ -79,7 +79,7 @@ const ImageProduct = ({images, name}: {images: string[], name: string}) => {
                     alt={name}
                     width={500}
                     height={400}
-                    className="object-cover object-center w-full h-full"
+                    className="object-cover object-center w-full h-full max-h-[600px]"
                   />
                 </div>
 

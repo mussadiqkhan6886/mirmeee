@@ -38,6 +38,7 @@ const AddToCartButton = ({
   const [selectedSize, setSelectedSize] = useState('');
   const [stock, setStock] = useState(0);
 
+
   const colors = variants
     .filter((v) => v.color)
     .map((v) => ({ color: v.color, colorStock: v.stock }));
@@ -45,6 +46,19 @@ const AddToCartButton = ({
   const sizes = variants
     .filter((v) => v.size)
     .map((v) => ({ size: v.size, sizeStock: v.stock }));
+
+    useEffect(() => {
+  // Auto-select single color
+  if (colors.length === 1 && !selectedColor) {
+    setSelectedColor(colors[0].color);
+  }
+
+  // Auto-select single size
+  if (sizes.length === 1 && !selectedSize) {
+    setSelectedSize(sizes[0].size);
+  }
+}, [colors, sizes, selectedColor, selectedSize]);
+
 
   // 🔹 Update stock whenever color or size changes
   useEffect(() => {
@@ -64,7 +78,7 @@ const AddToCartButton = ({
   }, [selectedColor, selectedSize, variants]);
 
   const handleAddToCart = () => {
-    if ((colors.length && !selectedColor) || (sizes.length && !selectedSize) || stock === 0) return;
+    if ((colors.length > 1 && !selectedColor) || (sizes.length > 1 && !selectedSize) || stock === 0) return;
 
     addToCart({
       id,

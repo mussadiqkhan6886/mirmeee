@@ -299,7 +299,7 @@ const AddProduct = () => {
         )}
 
         {/* Colors */}
-        {data.collection !== "Formals" && <div>
+        <div>
           <label className="block font-semibold mb-2">Colors</label>
           {data.colors.map((clr, i) => (
             <div key={i} className="flex items-center gap-2 mb-2">
@@ -326,10 +326,9 @@ const AddProduct = () => {
           <button type="button" onClick={addColor} className="text-sm text-blue-600">
             + Add Color
           </button>
-        </div>}
-
+        </div>
         {/* Sizes */}
-       {data.collection === "Formals" && (<div>
+       {(data.collection === "Formals") && (<div>
           <label className="block font-semibold mb-2">Sizes</label>
           {data.sizes.map((sz, i) => (
             <div key={i} className="flex items-center gap-2 mb-2">

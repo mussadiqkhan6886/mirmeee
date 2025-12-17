@@ -97,11 +97,17 @@ const AddToCartButton = ({
   return (
     <div className="space-y-4">
       {colors.length > 0 && (
+        <>
+        <p>Colors:</p>
         <Colors colors={colors} selectedColor={selectedColor} setSelectedColor={setSelectedColor} />
+        </>
       )}
 
       {sizes.length > 0 && (
+        <>
+         <p>Size:</p>
         <Sizes sizes={sizes} selectedSize={selectedSize} setSelectedSize={setSelectedSize} />
+        </>
       )}
 
       <button

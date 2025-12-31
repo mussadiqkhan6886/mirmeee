@@ -1,8 +1,9 @@
 export const navigation = [
     {title: "Home", link: "/"},
-    {title: "Hair Bow", link: "/collections/hair-bow"},
-    {title: "Metal Clips", link: "/collections/metal-clips"},
-    {title: "Flower Clips", link: "/collections/flower-clips"},
+    {title: "Hair Pins", link: "/collections/hair-pins"},
+    {title: "Hair Bows", link: "/collections/hair-bow"},
+    {title: "Metal Claws", link: "/collections/metal-clips"},
+    {title: "Flower Claws", link: "/collections/flower-clips"},
     {title: "Scrunchies", link: "/collections/scrunchies"},
     {title: "Headbands", link: "/collections/head-bands"},
     {title: "Formals", link: "/collections/formals"},
@@ -12,21 +13,28 @@ export const navigation = [
 
 export const collectionsData = [
   {
-    title: "Hair Bow",
+    title: "Hair Bows",
     link: "hair-bow",
     image: "/hairBow.jpg",
     description:
       "Soft and stylish bows for everyday wear. Perfect for kids and casual outfits."
   },
   {
-    title: "Metal Clips",
+    title: "Hair Pins",
+    link: "hair-pins",
+    image: "/hairpins.jpg",
+    description:
+      "Soft and stylish hair pins for everyday wear. Perfect for kids and casual outfits."
+  },
+  {
+    title: "Metal Claws",
     link: "metal-clips",
     image: "/metalClips.jpg",
     description:
       "Durable metal clips with a chic finish. Designed to hold hair securely all day."
   },
   {
-    title: "Flower Clips",
+    title: "Flower Claws",
     link: "flower-clips",
     image: "/flowerClips.jpg",
     description:
@@ -70,21 +78,28 @@ export const collectionsData = [
 ];
 export const collections = [
   {
-    title: "Hair Bow",
+    title: "Hair Bows",
     link: "/collections/hair-bow",
     image: "/hairBow.jpg",
     description:
       "Soft and stylish bows for everyday wear. Perfect for kids and casual outfits."
   },
+   {
+    title: "Hair Pins",
+    link: "/collections/hair-pins",
+    image: "/hairpins.jpg",
+    description:
+      "Soft and stylish hair pins for everyday wear. Perfect for kids and casual outfits."
+  },
   {
-    title: "Metal Clips",
+    title: "Metal Claws",
     link: "/collections/metal-clips",
     image: "/metalClips.jpg",
     description:
       "Durable metal clips with a chic finish. Designed to hold hair securely all day."
   },
   {
-    title: "Flower Clips",
+    title: "Flower Claws",
     link: "/collections/flower-clips",
     image: "/flowerClips.jpg",
     description:

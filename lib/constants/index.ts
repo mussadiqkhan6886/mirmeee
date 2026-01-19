@@ -28,7 +28,7 @@ export const collectionsData = [
   },
   {
     title: "Metal Claws",
-    link: "metal-clips",
+    link: "metal-claws",
     image: "/metalClips.jpg",
     description:
       "Durable metal clips with a chic finish. Designed to hold hair securely all day."

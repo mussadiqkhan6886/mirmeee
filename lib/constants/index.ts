@@ -35,7 +35,7 @@ export const collectionsData = [
   },
   {
     title: "Flower Claws",
-    link: "flower-clips",
+    link: "flower-claws",
     image: "/flowerClips.jpg",
     description:
       "Beautiful floral hair clips for a feminine touch. Great for parties and events."
@@ -93,14 +93,14 @@ export const collections = [
   },
   {
     title: "Metal Claws",
-    link: "/collections/metal-clips",
+    link: "/collections/metal-claws",
     image: "/metalClips.jpg",
     description:
       "Durable metal clips with a chic finish. Designed to hold hair securely all day."
   },
   {
     title: "Flower Claws",
-    link: "/collections/flower-clips",
+    link: "/collections/flower-claws",
     image: "/flowerClips.jpg",
     description:
       "Beautiful floral hair clips for a feminine touch. Great for parties and events."

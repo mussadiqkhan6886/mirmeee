@@ -1,7 +1,7 @@
 export const navigation = [
     {title: "Home", link: "/"},
     {title: "Hair Pins", link: "/collections/hair-pins"},
-    {title: "Hair Bows", link: "/collections/hair-bow"},
+    {title: "Hair Bows", link: "/collections/hair-bows"},
     {title: "Metal Claws", link: "/collections/metal-clips"},
     {title: "Flower Claws", link: "/collections/flower-clips"},
     {title: "Scrunchies", link: "/collections/scrunchies"},

@@ -14,7 +14,7 @@ export const navigation = [
 export const collectionsData = [
   {
     title: "Hair Bows",
-    link: "hair-bow",
+    link: "hair-bows",
     image: "/hairBow.jpg",
     description:
       "Soft and stylish bows for everyday wear. Perfect for kids and casual outfits."
@@ -79,7 +79,7 @@ export const collectionsData = [
 export const collections = [
   {
     title: "Hair Bows",
-    link: "/collections/hair-bow",
+    link: "/collections/hair-bows",
     image: "/hairBow.jpg",
     description:
       "Soft and stylish bows for everyday wear. Perfect for kids and casual outfits."
